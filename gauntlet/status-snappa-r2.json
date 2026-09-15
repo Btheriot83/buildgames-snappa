@@ -8,6 +8,10 @@
   "bar": "https://snappa.com/",
   "repo": "https://github.com/Btheriot83/buildgames-snappa",
   "branch": "feat/gauntlet-r2",
+  "prUrl": "https://github.com/Btheriot83/buildgames-snappa/pull/4",
+  "pr_url": "https://github.com/Btheriot83/buildgames-snappa/pull/4",
+  "sha": "28dca63",
+  "live_http": 200,
   "phaseA": {
     "done": true,
     "techniquesDone": [1, 2, 3, 4, 5, 6, 7, 8],
@@ -35,12 +39,18 @@
       "glowKilled": true
     }
   },
+  "assist": {
+    "configured": true,
+    "openRouter": true,
+    "llmBaseUrlSet": true,
+    "liveGetOk": true
+  },
   "status": "gauntlet_r2_complete",
   "readyForWalkthroughVideo": true,
   "doNotMessageBrandon": true,
-  "updatedAtPt": "2026-09-14 9:22 PM PT",
-  "finishedAtPt": "2026-09-14 9:22 PM PT",
-  "finishedAtUtc": "2026-09-15T04:22:47Z",
+  "updatedAtPt": "2026-09-14 9:26 PM PT",
+  "finishedAtPt": "2026-09-14 9:26 PM PT",
+  "finishedAtUtc": "2026-09-15T04:26:20Z",
   "path": "/workspace/build-games/apps/snappa",
-  "notes": "Phase B2 ten rounds under locked Night Press. Job ≤3s: compose fixed-size → Export PDF. Real Mesa/Roosevelt/AZMDR templates. OpenRouter assist fix. Brandon bar: stripped decorative gradients, glass blur, glow from chrome."
+  "notes": "Phase B2 ten rounds under locked Night Press. Job ≤3s compose→Export PDF. Real Mesa/Roosevelt/AZMDR templates. OpenRouter assist. Flat chrome anti-slop. PR #4 live. Ready for walkthrough video. Do not message Brandon."
 }
