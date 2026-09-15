@@ -104,7 +104,7 @@ export function TemplateGallery() {
                     animationDelay: `${i * 40}ms`,
                   }}
                 >
-                  <span className="absolute left-2 top-2 bg-ink-bg px-1.5 py-0.5 font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-ink-lime">
+                  <span className="absolute left-2 top-2 border border-ink-lime bg-ink-bg px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-lime">
                     {t.sizeLabel}
                   </span>
                   {/* Flat bottom plate — no gradient scrim */}
