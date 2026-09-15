@@ -242,14 +242,15 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 36px;
-  padding: 0.5rem 1rem;
+  min-height: 40px;
+  padding: 0.55rem 1.1rem;
   border-radius: 2px;
   border: 1px solid var(--ink-lime);
   background: var(--ink-lime);
   color: var(--ink-bg);
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.03em;
   line-height: 1;
 }
 .btn-primary:hover {
