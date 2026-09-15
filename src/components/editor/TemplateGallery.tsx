@@ -1,9 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { STARTER_TEMPLATES, inkWashDataUrl } from "@/lib/templates/starters";
+import { STARTER_TEMPLATES } from "@/lib/templates/starters";
 import { useEditorStore } from "@/store/editorStore";
 import { TiltCard } from "./TiltCard";
+
+const THUMBS: Record<string, string> = {
+  "launch-poster": "/assets/texture-square.jpg",
+  "quote-card": "/assets/texture-square.jpg",
+  "story-countdown": "/assets/texture-story.jpg",
+  "event-flyer": "/assets/empty-desk.jpg",
+  "product-drop": "/assets/texture-wide.jpg",
+};
 
 export function TemplateGallery() {
   const show = useEditorStore((s) => s.showTemplates);
@@ -28,28 +36,25 @@ export function TemplateGallery() {
 
   return (
     <div
-      className="absolute inset-0 z-40 flex items-center justify-center bg-[#0c0f0d]/88 p-6 backdrop-blur-[2px]"
+      className="absolute inset-0 z-40 flex items-center justify-center bg-[#0e1210]/92 p-6"
       data-testid="template-gallery"
     >
       <div
-        className="t-panel-slide ink-grain relative max-h-[90vh] w-full max-w-4xl overflow-hidden border border-ink-border bg-ink-surface"
+        className="t-panel-slide relative max-h-[90vh] w-full max-w-4xl overflow-hidden border border-ink-border bg-ink-surface"
         data-open={open ? "true" : "false"}
         style={{ ["--panel-translate-y" as string]: "24px" }}
       >
         <div className="flex items-end justify-between border-b border-ink-border px-6 py-5">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-lime">
-              Start here
+              Night Press · start
             </p>
-            <h2
-              className="mt-1 text-3xl font-bold tracking-tight text-ink-text"
-              style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
-            >
-              Pick a layout. Ship tonight.
+            <h2 className="mark-word mt-1 text-3xl tracking-tight text-ink-text">
+              Pick a size. Ink tonight.
             </h2>
             <p className="mt-2 max-w-xl text-sm text-ink-muted">
-              Fixed social sizes, local assets, SVG & PDF export. Nothing leaves
-              this browser unless you download it.
+              Fixed social canvases, local assets, SVG & PDF. Nothing leaves this
+              browser unless you download it.
             </p>
           </div>
           <button
@@ -70,10 +75,11 @@ export function TemplateGallery() {
               className="template-card"
             >
               <div
-                className="relative h-28 w-full overflow-hidden"
+                className="relative h-28 w-full overflow-hidden bg-ink-panel"
                 style={{
-                  backgroundImage: `url("${inkWashDataUrl(400, 160, i % 2 === 0 ? "#9FE870" : "#E8A54B", "#121812")}")`,
+                  backgroundImage: `url("${THUMBS[t.id] || "/assets/texture-square.jpg"}")`,
                   backgroundSize: "cover",
+                  backgroundPosition: "center",
                   animationDelay: `${i * 40}ms`,
                 }}
               >
@@ -82,10 +88,7 @@ export function TemplateGallery() {
                 </span>
               </div>
               <div className="flex flex-1 flex-col gap-1 p-3">
-                <span
-                  className="text-sm font-semibold text-ink-text group-hover:text-ink-lime"
-                  style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
-                >
+                <span className="mark-word text-sm text-ink-text group-hover:text-ink-lime">
                   {t.name}
                 </span>
                 <span className="text-xs leading-snug text-ink-muted">
@@ -109,7 +112,7 @@ export function TemplateGallery() {
             Start from blank canvas
           </button>
           <span className="font-mono text-[10px] text-ink-muted">
-            +1 ink drop per template
+            Real ink textures · +1 drop per template
           </span>
         </div>
       </div>

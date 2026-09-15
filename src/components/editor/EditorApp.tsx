@@ -10,6 +10,8 @@ import { TemplateGallery } from "./TemplateGallery";
 import { StatusBar } from "./StatusBar";
 import { GrainShader } from "./GrainShader";
 import { SuccessSplash } from "./SuccessSplash";
+import { SizeRail } from "./SizeRail";
+import { InkPressVideo } from "./InkPressVideo";
 
 export function EditorApp() {
   const hydrate = useEditorStore((s) => s.hydrate);
@@ -126,6 +128,8 @@ export function EditorApp() {
               </div>
             )}
             <Canvas />
+            <SizeRail />
+            <InkPressVideo />
             <TemplateGallery />
             <SuccessSplash />
           </main>

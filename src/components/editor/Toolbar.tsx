@@ -152,14 +152,11 @@ export function Toolbar() {
   return (
     <header className="flex h-12 shrink-0 items-center gap-2 border-b border-ink-border bg-ink-surface px-3">
       <div className="mr-1 flex items-center gap-2 border-r border-ink-border pr-3">
-        <span
-          className="text-lg font-bold tracking-tight text-ink-lime"
-          style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
-        >
+        <span className="mark-word text-lg text-ink-lime">
           Forge Ink
         </span>
         <span className="hidden text-[10px] uppercase tracking-[0.18em] text-ink-muted sm:inline">
-          local studio
+          night press
         </span>
       </div>
 

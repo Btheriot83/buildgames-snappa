@@ -19,7 +19,7 @@ export function LayersPanel() {
       <ul className="flex-1 overflow-y-auto p-1" data-testid="layers-list">
         {layers.length === 0 && (
           <li className="px-2 py-6 text-center text-xs text-ink-muted">
-            No layers yet — pick a template or draw.
+            Empty stack — load a template or draw on the sheet.
           </li>
         )}
         {layers.map((id) => {

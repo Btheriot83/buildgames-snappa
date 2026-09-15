@@ -113,7 +113,7 @@ export function Canvas() {
           width: 320,
           height: 80,
           text: "New text",
-          fontFamily: "Syne",
+          fontFamily: "Archivo Black",
           fontSize: 48,
           fontWeight: 700,
           fill: "#F4F7F2",
@@ -260,7 +260,7 @@ export function Canvas() {
   return (
     <div
       ref={containerRef}
-      className="relative h-full w-full overflow-hidden bg-[#0a0c0b]"
+      className="canvas-well relative h-full w-full overflow-hidden"
       style={{
         cursor:
           tool === "hand" || spaceDown
@@ -269,8 +269,8 @@ export function Canvas() {
               ? "default"
               : "crosshair",
         backgroundImage:
-          "radial-gradient(circle at 1px 1px, #1a211c 1px, transparent 0)",
-        backgroundSize: "24px 24px",
+          "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0)",
+        backgroundSize: "20px 20px",
       }}
       onWheel={onWheel}
       onPointerDown={onPointerDown}
@@ -305,7 +305,7 @@ export function Canvas() {
                 y1={0}
                 x2={g.position}
                 y2={doc.canvas.height}
-                stroke="#9FE870"
+                stroke="#A8E86A"
                 strokeWidth={1 / viewport.zoom}
                 strokeDasharray={`${4 / viewport.zoom} ${4 / viewport.zoom}`}
                 opacity={0.85}
@@ -317,7 +317,7 @@ export function Canvas() {
                 y1={g.position}
                 x2={doc.canvas.width}
                 y2={g.position}
-                stroke="#9FE870"
+                stroke="#A8E86A"
                 strokeWidth={1 / viewport.zoom}
                 strokeDasharray={`${4 / viewport.zoom} ${4 / viewport.zoom}`}
                 opacity={0.85}
@@ -410,7 +410,7 @@ function ElementNode({
           width={el.width}
           height={el.height}
           fill="none"
-          stroke="#9FE870"
+          stroke="#A8E86A"
           strokeWidth={2}
           strokeDasharray="6 4"
           pointerEvents="none"

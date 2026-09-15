@@ -7,7 +7,7 @@ test("first-visit template → canvas → export controls", async ({ page }) => 
     timeout: 30000,
   });
   await expect(
-    page.getByRole("heading", { name: /Pick a layout/i })
+    page.getByRole("heading", { name: /Pick a size/i })
   ).toBeVisible();
 
   await page.getByTestId("template-launch-poster").click();

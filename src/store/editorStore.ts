@@ -66,6 +66,10 @@ interface EditorState {
   setMissingFonts: (f: string[]) => void;
   bumpExport: () => Promise<void>;
   setShowTemplates: (v: boolean) => void;
+  applyAssistText: (
+    target: "headline" | "subhead" | "cta" | "quote" | "body",
+    text: string
+  ) => void;
 }
 
 function cloneDoc(doc: ProjectDocument): ProjectDocument {
@@ -433,5 +437,54 @@ export const useEditorStore = create<EditorState>()(
     },
 
     setShowTemplates: (v) => set((s) => { s.showTemplates = v; }),
+
+    applyAssistText: (target, text) => {
+      const doc = get().document;
+      const texts = doc.elements.filter((e) => e.type === "text");
+      if (!texts.length) {
+        set((s) => {
+          s.status = "error";
+          s.statusMessage = "Add or select text first — or load a template.";
+          s.errorRecoverable = true;
+        });
+        return;
+      }
+      const score = (name: string, body: string) => {
+        const n = `${name} ${body}`.toLowerCase();
+        const map: Record<string, string[]> = {
+          headline: ["title", "headline", "poster", "launch", "drop"],
+          subhead: ["sub", "blurb", "support", "deck"],
+          cta: ["cta", "button", "link", "url"],
+          quote: ["quote", "pull"],
+          body: ["body", "copy", "attribution", "studio"],
+        };
+        return (map[target] || []).reduce((acc, k) => acc + (n.includes(k) ? 2 : 0), 0);
+      };
+      const ranked = [...texts].sort(
+        (a, b) =>
+          score(b.name, b.type === "text" ? b.text : "") -
+          score(a.name, a.type === "text" ? a.text : "")
+      );
+      const pick = ranked[0];
+      get().pushHistory();
+      set((s) => {
+        const el = s.document.elements.find((e) => e.id === pick.id);
+        if (el && el.type === "text") {
+          el.text = text;
+          el.name = el.name || target;
+        }
+        s.dirty = true;
+        s.status = "success";
+        s.statusMessage = `Applied ${target} to “${pick.name}”`;
+      });
+      setTimeout(() => {
+        set((s) => {
+          if (s.status === "success") {
+            s.status = "idle";
+            s.statusMessage = "";
+          }
+        });
+      }, 1600);
+    },
   }))
 );

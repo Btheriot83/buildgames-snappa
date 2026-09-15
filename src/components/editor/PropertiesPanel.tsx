@@ -4,6 +4,7 @@ import { useEditorStore } from "@/store/editorStore";
 import { LOCAL_FONTS } from "@/lib/fonts";
 import { CANVAS_PRESETS } from "@/lib/templates/starters";
 import type { TextElement, RectElement, CircleElement, ImageElement } from "@/lib/types";
+import { AssistPanel } from "./AssistPanel";
 
 export function PropertiesPanel() {
   const doc = useEditorStore((s) => s.document);
@@ -109,8 +110,8 @@ export function PropertiesPanel() {
       )}
 
       {!el && selected.length <= 1 && (
-        <p className="px-3 py-8 text-center text-xs text-ink-muted">
-          Select an element to edit its properties.
+        <p className="px-3 py-6 text-center text-xs leading-relaxed text-ink-muted">
+          Nothing selected. Click type on the sheet, or ask the pressman below for copy that fits this size.
         </p>
       )}
 
@@ -175,6 +176,7 @@ export function PropertiesPanel() {
           </button>
         </section>
       )}
+      <AssistPanel />
     </div>
   );
 }

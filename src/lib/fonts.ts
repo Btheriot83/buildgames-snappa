@@ -1,19 +1,17 @@
-/** Distinctive local/system stacks — no Inter/Geist defaults. */
+/** Canvas + UI stacks — Archivo Black is the mark, not the whole UI. No Inter/Geist. */
 export const LOCAL_FONTS = [
-  { family: "Syne", fallback: "Arial Black, sans-serif", label: "Syne" },
+  { family: "Archivo Black", fallback: "Impact, sans-serif", label: "Archivo Black" },
   { family: "IBM Plex Sans", fallback: "Helvetica Neue, sans-serif", label: "IBM Plex Sans" },
   { family: "IBM Plex Mono", fallback: "Courier New, monospace", label: "IBM Plex Mono" },
   { family: "Playfair Display", fallback: "Georgia, serif", label: "Playfair Display" },
-  { family: "Archivo Black", fallback: "Impact, sans-serif", label: "Archivo Black" },
+  { family: "Syne", fallback: "Arial Black, sans-serif", label: "Syne (canvas)" },
   { family: "Georgia", fallback: "serif", label: "Georgia" },
   { family: "Courier New", fallback: "monospace", label: "Courier New" },
 ] as const;
 
 export type LocalFontFamily = (typeof LOCAL_FONTS)[number]["family"];
 
-export async function detectMissingFonts(
-  families: string[]
-): Promise<string[]> {
+export async function detectMissingFonts(families: string[]): Promise<string[]> {
   if (typeof document === "undefined") return [];
   const unique = Array.from(new Set(families.filter(Boolean)));
   const missing: string[] = [];

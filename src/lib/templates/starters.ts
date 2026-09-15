@@ -88,7 +88,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
     blurb: "Bold product drop on charcoal with lime strike.",
     category: "Social",
     build: () => {
-      const wash = inkWashDataUrl(1080, 1080, "#9FE870", "#141a15");
+      const wash = "/assets/texture-square.jpg";
       const imgId = createId("el");
       const barId = createId("el");
       const titleId = createId("el");
@@ -381,7 +381,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           visible: true,
           parentId: null,
           text: "SAVE THE DATE",
-          fontFamily: "Syne",
+          fontFamily: "Archivo Black",
           fontSize: 42,
           fontWeight: 700,
           fill: "#E8A54B",
@@ -460,7 +460,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           visible: true,
           parentId: null,
           text: "NIGHT\nMARKET",
-          fontFamily: "Syne",
+          fontFamily: "Archivo Black",
           fontSize: 110,
           fontWeight: 800,
           fill: "#F4F7F2",
@@ -523,7 +523,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
     category: "Wide",
     build: () => {
       const now = new Date().toISOString();
-      const wash = inkWashDataUrl(1200, 627, "#E8A54B", "#121812");
+      const wash = "/assets/texture-wide.jpg";
       const imgId = createId("el");
       const titleId = createId("el");
       const subId = createId("el");
@@ -577,7 +577,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           visible: true,
           parentId: null,
           text: "New ink. Same grit.",
-          fontFamily: "Syne",
+          fontFamily: "Archivo Black",
           fontSize: 64,
           fontWeight: 700,
           fill: "#F4F7F2",
