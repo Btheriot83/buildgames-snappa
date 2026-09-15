@@ -112,7 +112,7 @@ export function TemplateGallery() {
                     <span className="mb-1 inline-block bg-ink-lime px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-bg">
                       {t.category}
                     </span>
-                    <p className="card-title whitespace-pre-line text-base leading-tight sm:text-lg">
+                    <p className="card-title whitespace-pre-line text-lg leading-tight sm:text-xl">
                       {t.previewHeadline}
                     </p>
                     {t.previewSub && (
@@ -123,7 +123,7 @@ export function TemplateGallery() {
                   </div>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 p-3">
-                  <span className="card-title text-[15px] group-hover:text-ink-lime">
+                  <span className="card-title text-[16px] group-hover:text-ink-lime">
                     {t.name}
                   </span>
                   <span className="ui-caption leading-snug">
