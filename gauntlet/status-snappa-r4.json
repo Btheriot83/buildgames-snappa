@@ -71,7 +71,11 @@
   "doNotMessageBrandon": true,
   "path": "/workspace/build-games/apps/snappa",
   "updatedAtPt": "2026-09-14 10:15 PM PT",
-  "finishedAtPt": "2026-09-14 10:15 PM PT",
-  "finishedAtUtc": "2026-09-15T05:16:07Z",
-  "sha": "856ee57"
+  "finishedAtPt": "2026-09-14 10:16 PM PT",
+  "finishedAtUtc": "2026-09-15T05:17:03Z",
+  "sha": "45d4769",
+  "prUrl": "https://github.com/Btheriot83/buildgames-snappa/pull/6",
+  "pr_url": "https://github.com/Btheriot83/buildgames-snappa/pull/6",
+  "live_http": 200,
+  "notes": "Phase B4 INTEGRITY: 20 separate rN commits + shots + bar A/B every 5th. Dream-loop target + transitions on real actions. PR #6. Night Press locked. Do not message Brandon."
 }
