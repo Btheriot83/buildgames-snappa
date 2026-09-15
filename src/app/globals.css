@@ -322,14 +322,14 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 28px;
-  padding: 0.25rem 0.55rem;
+  min-height: 30px;
+  padding: 0.3rem 0.65rem;
   border-radius: 2px;
   border: 1px solid var(--ink-border-strong);
   background: var(--ink-bg);
   color: var(--ink-label);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
 }
 .btn-chip:hover {
@@ -389,8 +389,9 @@ textarea:focus-visible {
 
 .export-dock {
   background: var(--ink-surface);
-  border: 1px solid var(--ink-border-strong);
-  box-shadow: 4px 4px 0 rgba(14, 18, 16, 0.55);
+  border: 2px solid var(--ink-border-strong);
+  box-shadow: 5px 5px 0 rgba(14, 18, 16, 0.65);
+  padding: 0.35rem;
 }
 
 /* Layer selection: solid flat fill, not washed lime/15 */

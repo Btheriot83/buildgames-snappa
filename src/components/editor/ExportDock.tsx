@@ -69,7 +69,7 @@ export function ExportDock() {
 
   return (
     <div
-      className="export-dock absolute bottom-4 right-4 z-20 flex items-center gap-2 rounded-sm border border-ink-border-strong bg-ink-surface px-3 py-2"
+      className="export-dock absolute bottom-4 right-4 z-20 flex items-center gap-2 rounded-sm border border-ink-border-strong bg-ink-surface px-3.5 py-2.5"
       data-testid="export-dock"
     >
       <div className="mr-1 hidden sm:block">
