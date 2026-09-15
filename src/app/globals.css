@@ -368,12 +368,13 @@ textarea:focus-visible {
 
 .field-input {
   width: 100%;
+  min-height: 38px;
   border-radius: 2px;
   border: 1px solid var(--ink-border-strong);
   background: var(--ink-bg);
   color: var(--ink-text);
-  padding: 0.4rem 0.55rem;
-  font-size: 13px;
+  padding: 0.5rem 0.65rem;
+  font-size: 14px;
 }
 .field-input:focus {
   border-color: var(--ink-lime);
