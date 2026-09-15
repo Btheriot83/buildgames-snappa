@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEditorStore } from "@/store/editorStore";
 import type { AssistSuggestion } from "@/lib/ai/assist";
 import type { TextElement } from "@/lib/types";
@@ -20,6 +20,18 @@ export function AssistPanel() {
   const [configured, setConfigured] = useState<boolean | null>(null);
   const [result, setResult] = useState<AssistSuggestion | null>(null);
   const [error, setError] = useState("");
+  const shakeRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (!error) return;
+    const el = shakeRef.current;
+    if (!el) return;
+    el.classList.add("is-error");
+    el.classList.remove("is-shaking");
+    void el.offsetWidth;
+    el.classList.add("is-shaking");
+    const tmr = setTimeout(() => el.classList.remove("is-shaking"), 320);
+    return () => clearTimeout(tmr);
+  }, [error]);
 
   useEffect(() => {
     void fetch("/api/assist")
@@ -96,7 +108,8 @@ export function AssistPanel() {
           : "Add BUILD_GAMES_LLM_API_KEY (OpenRouter) on the server to unlock proofs."}
       </p>
       <textarea
-        className="field-input min-h-[72px] resize-y text-[13px]"
+        ref={shakeRef}
+        className={`field-input t-input min-h-[72px] resize-y text-[13px] ${error ? "is-error" : ""}`}
         placeholder={BRIEF_EXAMPLES[0]}
         value={brief}
         onChange={(e) => setBrief(e.target.value)}
@@ -124,7 +137,7 @@ export function AssistPanel() {
         {busy ? "Pulling proofs…" : "Suggest copy & layout"}
       </button>
       {error && (
-        <p className="ui-caption text-ink-danger" role="alert">
+        <p className="ui-caption font-medium text-ink-danger" role="alert">
           {error}
         </p>
       )}
