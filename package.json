@@ -1,0 +1,44 @@
+{
+  "name": "buildgames-snappa",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "test": "vitest run && playwright test"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "idb": "^8.0.3",
+    "immer": "^11.1.18",
+    "jspdf": "^4.2.1",
+    "nanoid": "^5.1.16",
+    "next": "15.5.25",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.25",
+    "jsdom": "^24.1.3",
+    "playwright": "^1.63.0",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^2.1.9"
+  }
+}
