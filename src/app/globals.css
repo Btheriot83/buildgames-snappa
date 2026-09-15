@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+:root {
+  --ink-bg: #0c0f0d;
+  --ink-surface: #151a17;
+  --ink-panel: #1c231e;
+  --ink-panel-2: #232b25;
+  --ink-border: #2a332c;
+  --ink-border-strong: #3a463d;
+  --ink-text: #e8ebe6;
+  --ink-muted: #8a948c;
+  --ink-lime: #9fe870;
+  --ink-lime-dim: #6faa4a;
+  --ink-amber: #e8a54b;
+  --ink-danger: #e85d4b;
+  --ink-selection: #9fe870;
+  --font-ui: "IBM Plex Sans", "Helvetica Neue", sans-serif;
+  --font-display: "Syne", "Arial Black", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+@font-face {
+  font-family: "Syne";
+  src: url("/fonts/syne-700.woff2") format("woff2");
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/plex-sans.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/plex-sans-600.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/plex-mono.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo Black";
+  src: url("/fonts/archivo-black.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/playfair.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-ink-bg: var(--ink-bg);
+  --color-ink-surface: var(--ink-surface);
+  --color-ink-panel: var(--ink-panel);
+  --color-ink-panel-2: var(--ink-panel-2);
+  --color-ink-border: var(--ink-border);
+  --color-ink-border-strong: var(--ink-border-strong);
+  --color-ink-text: var(--ink-text);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-lime: var(--ink-lime);
+  --color-ink-lime-dim: var(--ink-lime-dim);
+  --color-ink-amber: var(--ink-amber);
+  --color-ink-danger: var(--ink-danger);
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--ink-bg);
+  color: var(--ink-text);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ink-grain::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 50;
+}
+
+@keyframes ink-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ink-splash {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.animate-ink-in {
+  animation: ink-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-ink-splash {
+  animation: ink-splash 0.7s ease-out forwards;
+}
+
+.template-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.template-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink-lime-dim);
+}
+
+.tool-btn[data-active="true"] {
+  background: var(--ink-lime);
+  color: var(--ink-bg);
+}
+
+.canvas-stage {
+  transition: transform 0.15s ease-out;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-border-strong);
+  border-radius: 0;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--ink-lime);
+  outline-offset: 2px;
+}
