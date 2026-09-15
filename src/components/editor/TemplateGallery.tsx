@@ -43,12 +43,12 @@ export function TemplateGallery() {
       data-testid="template-gallery"
     >
       <div
-        className="t-panel-slide relative max-h-[92vh] w-full max-w-5xl overflow-hidden border border-ink-border bg-ink-surface"
+        className="t-panel-slide relative max-h-[92vh] w-full max-w-5xl overflow-hidden border border-ink-border-strong bg-ink-surface"
         data-open={open ? "true" : "false"}
         style={{ ["--panel-translate-y" as string]: "24px" }}
       >
         {/* Job billboard — ≤3s: compose fixed-size → export */}
-        <div className="job-tape flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-ink-lime/30 bg-ink-lime px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-bg sm:px-6">
+        <div className="job-tape flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-ink-border-strong bg-ink-lime px-4 py-3 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-bg sm:px-6">
           <span>Compose graphic</span>
           <span aria-hidden>→</span>
           <span>Fixed size</span>
@@ -59,22 +59,22 @@ export function TemplateGallery() {
           </span>
         </div>
 
-        <div className="flex items-end justify-between gap-4 border-b border-ink-border px-5 py-4 sm:px-6 sm:py-5">
+        <div className="flex items-end justify-between gap-4 border-b border-ink-border-strong px-5 py-4 sm:px-6 sm:py-5">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-lime">
+            <p className="ui-label t-texts-reveal text-ink-lime" data-open={open ? "true" : "false"} data-delay="0">
               Night Press · start
             </p>
-            <h2 className="mark-word mt-1 text-2xl tracking-tight text-ink-text sm:text-3xl">
+            <h2 className="mark-word t-texts-reveal mt-1 text-4xl tracking-tight text-ink-text sm:text-5xl" data-open={open ? "true" : "false"} data-delay="1">
               Compose. Export.
             </h2>
-            <p className="mt-2 max-w-xl text-sm text-ink-muted">
+            <p className="ui-body t-texts-reveal mt-2 max-w-xl text-ink-muted" data-open={open ? "true" : "false"} data-delay="2">
               Pick a fixed social size, edit type on the sheet, download SVG or
               PDF. Nothing leaves this browser unless you export it.
             </p>
           </div>
           <button
             type="button"
-            className="shrink-0 rounded-sm border border-ink-border px-3 py-1.5 text-xs text-ink-muted hover:text-ink-text"
+            className="btn-secondary shrink-0"
             onClick={() => setShowTemplates(false)}
           >
             Close
@@ -104,29 +104,29 @@ export function TemplateGallery() {
                     animationDelay: `${i * 40}ms`,
                   }}
                 >
-                  <span className="absolute left-2 top-2 bg-ink-bg px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-lime">
+                  <span className="absolute left-2 top-2 border border-ink-lime bg-ink-bg px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-lime">
                     {t.sizeLabel}
                   </span>
                   {/* Flat bottom plate — no gradient scrim */}
                   <div className="absolute inset-x-0 bottom-0 bg-ink-bg px-2 pb-2 pt-3">
-                    <span className="mb-1 inline-block bg-ink-lime px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-bg">
+                    <span className="mb-1 inline-block bg-ink-lime px-1.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-bg">
                       {t.category}
                     </span>
-                    <p className="mark-word whitespace-pre-line text-base leading-tight text-ink-text sm:text-lg">
+                    <p className="card-title whitespace-pre-line text-lg leading-tight sm:text-xl">
                       {t.previewHeadline}
                     </p>
                     {t.previewSub && (
-                      <p className="mt-0.5 font-mono text-[10px] text-ink-amber">
+                      <p className="mt-0.5 font-mono text-[11px] font-medium text-ink-amber">
                         {t.previewSub}
                       </p>
                     )}
                   </div>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 p-3">
-                  <span className="mark-word text-sm text-ink-text group-hover:text-ink-lime">
+                  <span className="card-title text-[16px] group-hover:text-ink-lime">
                     {t.name}
                   </span>
-                  <span className="text-xs leading-snug text-ink-muted">
+                  <span className="ui-caption leading-snug">
                     {t.blurb}
                   </span>
                 </div>
@@ -135,16 +135,16 @@ export function TemplateGallery() {
           })}
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-ink-border px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="flex flex-col gap-3 border-t border-ink-border-strong px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted">
+            <span className="ui-label">
               Blank + size
             </span>
             {CANVAS_PRESETS.slice(0, 4).map((p) => (
               <button
                 key={p.label}
                 type="button"
-                className="rounded-sm border border-ink-border px-2 py-1 text-[10px] text-ink-muted hover:border-ink-lime-dim hover:text-ink-text"
+                className="btn-chip"
                 onClick={() => {
                   setCanvasSize(p.width, p.height, p.label);
                   newBlank();
@@ -156,7 +156,7 @@ export function TemplateGallery() {
             ))}
             <button
               type="button"
-              className="rounded-sm bg-ink-panel px-2.5 py-1 text-[10px] font-medium text-ink-lime hover:bg-ink-lime hover:text-ink-bg"
+              className="btn-primary"
               onClick={() => {
                 newBlank();
                 setShowTemplates(false);
@@ -166,7 +166,7 @@ export function TemplateGallery() {
               Blank sheet
             </button>
           </div>
-          <span className="font-mono text-[10px] text-ink-muted">
+          <span className="ui-caption font-mono">
             Real shop copy · +1 drop per template · then Export PDF
           </span>
         </div>

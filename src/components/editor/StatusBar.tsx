@@ -15,7 +15,7 @@ export function StatusBar() {
 
   if (!hydrated) {
     return (
-      <div className="flex h-8 items-center border-t border-ink-border bg-ink-surface px-3 font-mono text-[11px] text-ink-muted">
+      <div className="flex h-9 items-center border-t border-ink-border-strong bg-ink-surface px-3 font-mono text-xs text-ink-label">
         <span className="animate-pulse">Loading local workspace…</span>
       </div>
     );
@@ -40,7 +40,7 @@ export function StatusBar() {
 
   return (
     <div
-      className="flex h-8 shrink-0 items-center gap-3 border-t border-ink-border bg-ink-surface px-3 font-mono text-[11px]"
+      className="flex h-10 shrink-0 items-center gap-3 border-t border-ink-border-strong bg-ink-surface px-3 font-mono text-[13px]"
       data-testid="status-bar"
     >
       <span className={tone}>
@@ -58,7 +58,7 @@ export function StatusBar() {
       {missing.length > 0 && (
         <span className="text-ink-amber">Font warn: {missing.join(", ")}</span>
       )}
-      <span className="ml-auto text-ink-muted">
+      <span className="ml-auto text-ink-label">
         {doc.canvas.label} · {doc.canvas.width}×{doc.canvas.height} ·{" "}
         {doc.elements.length} elements
       </span>

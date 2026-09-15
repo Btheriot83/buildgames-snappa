@@ -6,14 +6,15 @@
   --ink-surface: #161c18;
   --ink-panel: #1b221d;
   --ink-panel-2: #232b25;
-  --ink-border: #2c352f;
-  --ink-border-strong: #3d483f;
-  --ink-text: #eceee9;
-  --ink-muted: #8b958d;
-  --ink-lime: #a8e86a;
-  --ink-lime-dim: #6faa4a;
-  --ink-amber: #e0a045;
-  --ink-danger: #e85d4b;
+  --ink-border: #46524a;
+  --ink-border-strong: #5a6a60;
+  --ink-text: #f2f4ef;
+  --ink-muted: #b2bbb4;
+  --ink-label: #c8d0c9;
+  --ink-lime: #b4f074;
+  --ink-lime-dim: #7fbe52;
+  --ink-amber: #e8ad52;
+  --ink-danger: #f06a58;
   --ink-selection: #a8e86a;
   --ink-paper: #e7e1d4;
   --ink-paper-grid: #d4cec0;
@@ -76,6 +77,7 @@
   --color-ink-border-strong: var(--ink-border-strong);
   --color-ink-text: var(--ink-text);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-label: var(--ink-label);
   --color-ink-lime: var(--ink-lime);
   --color-ink-lime-dim: var(--ink-lime-dim);
   --color-ink-amber: var(--ink-amber);
@@ -127,10 +129,11 @@ body {
 
 .template-card {
   transition: transform 0.18s ease, border-color 0.18s ease;
+  border: 1px solid var(--ink-border-strong);
 }
 .template-card:hover {
   transform: translateY(-2px);
-  border-color: var(--ink-lime-dim);
+  border-color: var(--ink-lime);
 }
 
 .tool-btn[data-active="true"] {
@@ -146,13 +149,13 @@ body {
 .canvas-stage {
   transition: transform 0.15s ease-out;
   box-shadow:
-    8px 10px 0 rgba(14, 18, 16, 0.35),
-    0 0 0 1px rgba(0, 0, 0, 0.25);
+    10px 12px 0 rgba(14, 18, 16, 0.45),
+    0 0 0 2px rgba(0, 0, 0, 0.35);
 }
 
 .mark-word {
   font-family: "Archivo Black", Impact, sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -195,4 +198,206 @@ textarea:focus-visible {
   background: var(--ink-surface);
   border: 1px solid var(--ink-border-strong);
   box-shadow: 4px 4px 0 rgba(14, 18, 16, 0.5);
+}
+
+/* Phase B3 — type ladder + button weight + contrast (flat, no gradients) */
+.ui-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-label);
+}
+.ui-caption {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+.ui-body {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-text);
+}
+.ui-title {
+  font-family: var(--font-ui);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink-text);
+}
+.mark-word {
+  font-family: "Archivo Black", Impact, sans-serif;
+  letter-spacing: -0.035em;
+}
+/* Card titles use UI sans — Archivo reserved for mark + canvas posters */
+.card-title {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-text);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.55rem 1.1rem;
+  border-radius: 2px;
+  border: 1px solid var(--ink-lime);
+  background: var(--ink-lime);
+  color: var(--ink-bg);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+.btn-primary:hover {
+  background: var(--ink-lime-dim);
+  border-color: var(--ink-lime-dim);
+}
+.btn-primary:disabled {
+  opacity: 0.45;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.55rem 0.95rem;
+  border-radius: 2px;
+  border: 2px solid var(--ink-border-strong);
+  background: var(--ink-panel);
+  color: var(--ink-text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+.btn-secondary:hover {
+  border-color: var(--ink-lime-dim);
+  color: var(--ink-text);
+  background: var(--ink-panel-2);
+}
+
+.btn-amber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0.5rem 0.875rem;
+  border-radius: 2px;
+  border: 1px solid var(--ink-amber);
+  background: var(--ink-amber);
+  color: var(--ink-bg);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+.btn-amber:hover { background: #d49a3f; border-color: #d49a3f; }
+.btn-amber:disabled { opacity: 0.45; filter: none; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0.35rem 0.65rem;
+  border-radius: 2px;
+  border: 1px solid var(--ink-border);
+  background: transparent;
+  color: var(--ink-label);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+.btn-ghost:hover {
+  color: var(--ink-text);
+  background: var(--ink-panel);
+  border-color: var(--ink-border);
+}
+
+.btn-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0.3rem 0.65rem;
+  border-radius: 2px;
+  border: 1px solid var(--ink-border-strong);
+  background: var(--ink-bg);
+  color: var(--ink-label);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+.btn-chip:hover {
+  border-color: var(--ink-lime-dim);
+  color: var(--ink-text);
+}
+.btn-chip[data-active="true"] {
+  background: var(--ink-lime);
+  border-color: var(--ink-lime);
+  color: var(--ink-bg);
+}
+
+.tool-btn {
+  min-height: 34px;
+  border: 1px solid var(--ink-border);
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--ink-panel);
+  color: var(--ink-label);
+}
+.tool-btn[data-active="true"] {
+  background: var(--ink-lime);
+  color: var(--ink-bg);
+  border-color: var(--ink-lime);
+  font-weight: 700;
+}
+
+.panel-head {
+  border-bottom: 1px solid var(--ink-border-strong);
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-lime);
+  background: var(--ink-surface);
+}
+
+.field-input {
+  width: 100%;
+  min-height: 38px;
+  border-radius: 2px;
+  border: 1px solid var(--ink-border-strong);
+  background: var(--ink-bg);
+  color: var(--ink-text);
+  padding: 0.5rem 0.65rem;
+  font-size: 14px;
+}
+.field-input:focus {
+  border-color: var(--ink-lime);
+}
+
+.job-tape {
+  letter-spacing: 0.14em;
+  font-size: 12px;
+}
+
+.export-dock {
+  background: var(--ink-surface);
+  border: 2px solid var(--ink-border-strong);
+  box-shadow: 5px 5px 0 rgba(14, 18, 16, 0.65);
+  padding: 0.35rem;
+}
+
+/* Layer selection: solid flat fill, not washed lime/15 */
+.layer-row[data-active="true"] {
+  background: #24301f;
+  color: var(--ink-lime);
+  border: 1px solid var(--ink-lime-dim);
 }
