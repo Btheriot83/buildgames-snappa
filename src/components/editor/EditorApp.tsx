@@ -10,6 +10,9 @@ import { TemplateGallery } from "./TemplateGallery";
 import { StatusBar } from "./StatusBar";
 import { GrainShader } from "./GrainShader";
 import { SuccessSplash } from "./SuccessSplash";
+import { SizeRail } from "./SizeRail";
+import { InkPressVideo } from "./InkPressVideo";
+import { ExportDock } from "./ExportDock";
 
 export function EditorApp() {
   const hydrate = useEditorStore((s) => s.hydrate);
@@ -88,6 +91,24 @@ export function EditorApp() {
     <div className="relative flex h-dvh flex-col overflow-hidden bg-ink-bg text-ink-text">
       <GrainShader />
       <div className="relative z-10 flex h-full flex-col">
+        {/* Materials tape — Night Press job strip, spottable in ≤3s */}
+        <div
+          className="job-tape flex h-7 shrink-0 items-center gap-3 overflow-hidden border-b border-ink-lime/25 bg-[#121812] px-3 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-lime"
+          data-testid="materials-tape"
+        >
+          <span className="text-ink-amber">Night Press</span>
+          <span className="text-ink-muted">/</span>
+          <span>Fixed size</span>
+          <span className="text-ink-muted">/</span>
+          <span>Local ink</span>
+          <span className="text-ink-muted">/</span>
+          <span>SVG + PDF</span>
+          <span className="text-ink-muted">/</span>
+          <span className="hidden sm:inline">No account</span>
+          <span className="ml-auto hidden text-ink-muted md:inline">
+            Compose → Export
+          </span>
+        </div>
         <Toolbar />
         <div className="flex min-h-0 flex-1">
           <aside className="hidden w-56 shrink-0 border-r border-ink-border bg-ink-surface/95 md:block">
@@ -126,6 +147,9 @@ export function EditorApp() {
               </div>
             )}
             <Canvas />
+            <SizeRail />
+            <InkPressVideo />
+            <ExportDock />
             <TemplateGallery />
             <SuccessSplash />
           </main>

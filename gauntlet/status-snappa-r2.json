@@ -1,0 +1,67 @@
+{
+  "slug": "snappa",
+  "product": "Forge Ink",
+  "aesthetic": "Night Press",
+  "identityFrozen": true,
+  "reseeded": false,
+  "demoUrl": "https://buildgames-snappa.vercel.app",
+  "bar": "https://snappa.com/",
+  "repo": "https://github.com/Btheriot83/buildgames-snappa",
+  "branch": "feat/gauntlet-r2",
+  "prUrl": "https://github.com/Btheriot83/buildgames-snappa/pull/4",
+  "pr_url": "https://github.com/Btheriot83/buildgames-snappa/pull/4",
+  "sha": "9b3e7cd",
+  "live_http": 200,
+  "phaseA": {
+    "done": true,
+    "techniquesDone": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "identityPath": "docs/IDENTITY.md"
+  },
+  "phaseB": {
+    "roundsCompleted": 5,
+    "roundsTarget": 5,
+    "workbench": "apps/snappa/gauntlet/workbench.md"
+  },
+  "phaseB2": {
+    "roundsCompleted": 10,
+    "roundsTarget": 10,
+    "workbench": "apps/snappa/gauntlet/workbench-r2.md",
+    "visibleDelta": "apps/snappa/gauntlet/VISIBLE_DELTA.md",
+    "focus": [
+      "job clarity compose\u2192export",
+      "real AZ shop templates",
+      "visible mistake fixes",
+      "flat chrome anti-slop (no gradients/glass/glow)"
+    ],
+    "antiSlop": {
+      "gradientsStripped": true,
+      "glassBlurKilled": true,
+      "glowKilled": true
+    }
+  },
+  "assist": {
+    "configured": true,
+    "openRouterRoute": true,
+    "llmBaseUrlSet": true,
+    "liveGetOk": true,
+    "livePostHttp": 502,
+    "note": "Routed to OpenRouter per LLM.md; provider returns 401 for current BUILD_GAMES_LLM_API_KEY. UI stays honest (no canned AI)."
+  },
+  "status": "gauntlet_r2_complete",
+  "readyForWalkthroughVideo": true,
+  "doNotMessageBrandon": true,
+  "updatedAtPt": "2026-09-14 9:26 PM PT",
+  "finishedAtPt": "2026-09-14 9:26 PM PT",
+  "finishedAtUtc": "2026-09-15T04:26:54Z",
+  "path": "/workspace/build-games/apps/snappa",
+  "notes": "Phase B2 ten rounds under locked Night Press. Job \u22643s compose\u2192Export PDF. Real Mesa/Roosevelt/AZMDR templates. OpenRouter assist. Flat chrome anti-slop. PR #4 live. Ready for walkthrough video. Do not message Brandon."
+}

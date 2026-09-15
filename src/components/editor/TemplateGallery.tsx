@@ -1,15 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { STARTER_TEMPLATES, inkWashDataUrl } from "@/lib/templates/starters";
+import { CANVAS_PRESETS, STARTER_TEMPLATES } from "@/lib/templates/starters";
 import { useEditorStore } from "@/store/editorStore";
 import { TiltCard } from "./TiltCard";
+
+const THUMBS: Record<string, string> = {
+  "launch-poster": "/assets/texture-square.jpg",
+  "quote-card": "/assets/texture-square.jpg",
+  "story-countdown": "/assets/texture-story.jpg",
+  "event-flyer": "/assets/empty-desk.jpg",
+  "product-drop": "/assets/texture-wide.jpg",
+  "shop-hours": "/assets/texture-square.jpg",
+  "story-offer": "/assets/texture-story.jpg",
+};
 
 export function TemplateGallery() {
   const show = useEditorStore((s) => s.showTemplates);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const setShowTemplates = useEditorStore((s) => s.setShowTemplates);
   const newBlank = useEditorStore((s) => s.newBlank);
+  const setCanvasSize = useEditorStore((s) => s.setCanvasSize);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -28,88 +39,135 @@ export function TemplateGallery() {
 
   return (
     <div
-      className="absolute inset-0 z-40 flex items-center justify-center bg-[#0c0f0d]/88 p-6 backdrop-blur-[2px]"
+      className="absolute inset-0 z-40 flex items-center justify-center bg-ink-bg p-4 sm:p-6"
       data-testid="template-gallery"
     >
       <div
-        className="t-panel-slide ink-grain relative max-h-[90vh] w-full max-w-4xl overflow-hidden border border-ink-border bg-ink-surface"
+        className="t-panel-slide relative max-h-[92vh] w-full max-w-5xl overflow-hidden border border-ink-border bg-ink-surface"
         data-open={open ? "true" : "false"}
         style={{ ["--panel-translate-y" as string]: "24px" }}
       >
-        <div className="flex items-end justify-between border-b border-ink-border px-6 py-5">
+        {/* Job billboard — ≤3s: compose fixed-size → export */}
+        <div className="job-tape flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-ink-lime/30 bg-ink-lime px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-bg sm:px-6">
+          <span>Compose graphic</span>
+          <span aria-hidden>→</span>
+          <span>Fixed size</span>
+          <span aria-hidden>→</span>
+          <span>Export SVG / PDF</span>
+          <span className="ml-auto hidden opacity-80 sm:inline">
+            No account · local ink
+          </span>
+        </div>
+
+        <div className="flex items-end justify-between gap-4 border-b border-ink-border px-5 py-4 sm:px-6 sm:py-5">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-lime">
-              Start here
+              Night Press · start
             </p>
-            <h2
-              className="mt-1 text-3xl font-bold tracking-tight text-ink-text"
-              style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
-            >
-              Pick a layout. Ship tonight.
+            <h2 className="mark-word mt-1 text-2xl tracking-tight text-ink-text sm:text-3xl">
+              Compose. Export.
             </h2>
             <p className="mt-2 max-w-xl text-sm text-ink-muted">
-              Fixed social sizes, local assets, SVG & PDF export. Nothing leaves
-              this browser unless you download it.
+              Pick a fixed social size, edit type on the sheet, download SVG or
+              PDF. Nothing leaves this browser unless you export it.
             </p>
           </div>
           <button
             type="button"
-            className="rounded-sm border border-ink-border px-3 py-1.5 text-xs text-ink-muted hover:text-ink-text"
+            className="shrink-0 rounded-sm border border-ink-border px-3 py-1.5 text-xs text-ink-muted hover:text-ink-text"
             onClick={() => setShowTemplates(false)}
           >
             Close
           </button>
         </div>
 
-        <div className="grid max-h-[60vh] grid-cols-1 gap-3 overflow-y-auto p-6 sm:grid-cols-2 lg:grid-cols-3">
-          {STARTER_TEMPLATES.map((t, i) => (
-            <TiltCard
-              key={t.id}
-              testId={`template-${t.id}`}
-              onClick={() => loadTemplate(t.id)}
-              className="template-card"
-            >
-              <div
-                className="relative h-28 w-full overflow-hidden"
-                style={{
-                  backgroundImage: `url("${inkWashDataUrl(400, 160, i % 2 === 0 ? "#9FE870" : "#E8A54B", "#121812")}")`,
-                  backgroundSize: "cover",
-                  animationDelay: `${i * 40}ms`,
-                }}
+        <div className="grid max-h-[52vh] grid-cols-1 gap-3 overflow-y-auto p-4 sm:grid-cols-2 sm:p-6 lg:grid-cols-3 xl:grid-cols-4">
+          {STARTER_TEMPLATES.map((t, i) => {
+            const isTall =
+              t.id === "story-countdown" || t.id === "story-offer";
+            const isWide = t.id === "product-drop";
+            return (
+              <TiltCard
+                key={t.id}
+                testId={`template-${t.id}`}
+                onClick={() => loadTemplate(t.id)}
+                className="template-card"
               >
-                <span className="absolute bottom-2 left-2 bg-ink-lime px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-bg">
-                  {t.category}
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col gap-1 p-3">
-                <span
-                  className="text-sm font-semibold text-ink-text group-hover:text-ink-lime"
-                  style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
+                <div
+                  className={`relative w-full overflow-hidden bg-ink-panel ${
+                    isTall ? "h-36" : isWide ? "h-24" : "h-28"
+                  }`}
+                  style={{
+                    backgroundImage: `url("${THUMBS[t.id] || "/assets/texture-square.jpg"}")`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    animationDelay: `${i * 40}ms`,
+                  }}
                 >
-                  {t.name}
-                </span>
-                <span className="text-xs leading-snug text-ink-muted">
-                  {t.blurb}
-                </span>
-              </div>
-            </TiltCard>
-          ))}
+                  <span className="absolute left-2 top-2 bg-ink-bg px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-lime">
+                    {t.sizeLabel}
+                  </span>
+                  {/* Flat bottom plate — no gradient scrim */}
+                  <div className="absolute inset-x-0 bottom-0 bg-ink-bg px-2 pb-2 pt-3">
+                    <span className="mb-1 inline-block bg-ink-lime px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-bg">
+                      {t.category}
+                    </span>
+                    <p className="mark-word whitespace-pre-line text-base leading-tight text-ink-text sm:text-lg">
+                      {t.previewHeadline}
+                    </p>
+                    {t.previewSub && (
+                      <p className="mt-0.5 font-mono text-[10px] text-ink-amber">
+                        {t.previewSub}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col gap-1 p-3">
+                  <span className="mark-word text-sm text-ink-text group-hover:text-ink-lime">
+                    {t.name}
+                  </span>
+                  <span className="text-xs leading-snug text-ink-muted">
+                    {t.blurb}
+                  </span>
+                </div>
+              </TiltCard>
+            );
+          })}
         </div>
 
-        <div className="flex items-center justify-between border-t border-ink-border px-6 py-3">
-          <button
-            type="button"
-            className="text-xs text-ink-muted underline-offset-2 hover:text-ink-text hover:underline"
-            onClick={() => {
-              newBlank();
-              setShowTemplates(false);
-            }}
-            data-testid="blank-canvas"
-          >
-            Start from blank canvas
-          </button>
+        <div className="flex flex-col gap-3 border-t border-ink-border px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted">
+              Blank + size
+            </span>
+            {CANVAS_PRESETS.slice(0, 4).map((p) => (
+              <button
+                key={p.label}
+                type="button"
+                className="rounded-sm border border-ink-border px-2 py-1 text-[10px] text-ink-muted hover:border-ink-lime-dim hover:text-ink-text"
+                onClick={() => {
+                  setCanvasSize(p.width, p.height, p.label);
+                  newBlank();
+                  setShowTemplates(false);
+                }}
+              >
+                {p.label.replace("Instagram ", "IG ").replace("LinkedIn / ", "")}
+              </button>
+            ))}
+            <button
+              type="button"
+              className="rounded-sm bg-ink-panel px-2.5 py-1 text-[10px] font-medium text-ink-lime hover:bg-ink-lime hover:text-ink-bg"
+              onClick={() => {
+                newBlank();
+                setShowTemplates(false);
+              }}
+              data-testid="blank-canvas"
+            >
+              Blank sheet
+            </button>
+          </div>
           <span className="font-mono text-[10px] text-ink-muted">
-            +1 ink drop per template
+            Real shop copy · +1 drop per template · then Export PDF
           </span>
         </div>
       </div>

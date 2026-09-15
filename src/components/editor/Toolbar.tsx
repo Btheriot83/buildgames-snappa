@@ -152,14 +152,9 @@ export function Toolbar() {
   return (
     <header className="flex h-12 shrink-0 items-center gap-2 border-b border-ink-border bg-ink-surface px-3">
       <div className="mr-1 flex items-center gap-2 border-r border-ink-border pr-3">
-        <span
-          className="text-lg font-bold tracking-tight text-ink-lime"
-          style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
-        >
-          Forge Ink
-        </span>
+        <span className="mark-word text-lg text-ink-lime">Forge Ink</span>
         <span className="hidden text-[10px] uppercase tracking-[0.18em] text-ink-muted sm:inline">
-          local studio
+          night press
         </span>
       </div>
 
@@ -229,11 +224,11 @@ export function Toolbar() {
 
       <div className="ml-auto flex items-center gap-2">
         <div
-          className="hidden items-center gap-2 rounded-sm border border-ink-border bg-ink-panel px-2 py-1 font-mono text-[10px] text-ink-amber md:flex"
+          className="hidden items-center gap-2 px-1 font-mono text-[10px] text-ink-muted md:flex"
           title="Ink drops earned from templates & exports"
           data-testid="ink-drops"
         >
-          <span className="inline-block h-2 w-2 rounded-full bg-ink-lime" />
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink-muted" />
           <InkDropCounter value={inkDrops} suffix="ink" />
           <span>·</span>
           <InkDropCounter value={exportsCount} suffix="exports" />
@@ -241,25 +236,27 @@ export function Toolbar() {
 
         <button
           type="button"
-          className="rounded-sm px-2.5 py-1.5 text-xs text-ink-muted hover:bg-ink-panel hover:text-ink-text"
+          className="rounded-sm border border-ink-lime/40 bg-ink-panel px-2.5 py-1.5 text-xs font-medium text-ink-lime hover:bg-ink-lime hover:text-ink-bg"
           onClick={() => setShowTemplates(true)}
+          data-testid="open-templates"
         >
           Templates
         </button>
         <button
           type="button"
-          className="rounded-sm px-2.5 py-1.5 text-xs text-ink-muted hover:bg-ink-panel"
+          className="hidden rounded-sm px-2 py-1.5 text-[11px] text-ink-muted/70 hover:bg-ink-panel hover:text-ink-muted sm:inline"
           onClick={() => projectRef.current?.click()}
         >
           Import
         </button>
         <button
           type="button"
-          className="rounded-sm px-2.5 py-1.5 text-xs text-ink-muted hover:bg-ink-panel"
+          className="hidden rounded-sm px-2 py-1.5 text-[11px] text-ink-muted/70 hover:bg-ink-panel hover:text-ink-muted sm:inline"
           onClick={handleExportJson}
         >
           .JSON
         </button>
+        <div className="mx-0.5 hidden h-5 w-px bg-ink-border sm:block" />
         <button
           type="button"
           data-testid="export-svg"
@@ -271,10 +268,10 @@ export function Toolbar() {
         <button
           type="button"
           data-testid="export-pdf"
-          className="rounded-sm bg-ink-lime px-3 py-1.5 text-xs font-semibold text-ink-bg hover:brightness-110"
+          className="rounded-sm bg-ink-lime px-3 py-1.5 text-xs font-semibold text-ink-bg hover:bg-ink-lime-dim"
           onClick={handleExportPdf}
         >
-          PDF
+          Export PDF
         </button>
       </div>
 

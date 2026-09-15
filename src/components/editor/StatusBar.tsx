@@ -11,6 +11,7 @@ export function StatusBar() {
   const errorRecoverable = useEditorStore((s) => s.errorRecoverable);
   const setStatus = useEditorStore((s) => s.setStatus);
   const hydrated = useEditorStore((s) => s.hydrated);
+  const showTemplates = useEditorStore((s) => s.showTemplates);
 
   if (!hydrated) {
     return (
@@ -29,18 +30,21 @@ export function StatusBar() {
           ? "text-ink-amber"
           : "text-ink-muted";
 
+  const idleHint = showTemplates
+    ? "Pick a template → edit on the sheet → Export PDF"
+    : doc.elements.length === 0
+      ? "Blank sheet — draw, or open Templates"
+      : dirty
+        ? "Unsaved · autosave on · Export when ready"
+        : "Compose done? Export SVG or PDF";
+
   return (
     <div
       className="flex h-8 shrink-0 items-center gap-3 border-t border-ink-border bg-ink-surface px-3 font-mono text-[11px]"
       data-testid="status-bar"
     >
       <span className={tone}>
-        {message ||
-          (status === "idle"
-            ? dirty
-              ? "Unsaved changes · autosave on"
-              : "Ready"
-            : status)}
+        {message || (status === "idle" ? idleHint : status)}
       </span>
       {status === "error" && errorRecoverable && (
         <button
@@ -52,9 +56,7 @@ export function StatusBar() {
         </button>
       )}
       {missing.length > 0 && (
-        <span className="text-ink-amber">
-          Font warn: {missing.join(", ")}
-        </span>
+        <span className="text-ink-amber">Font warn: {missing.join(", ")}</span>
       )}
       <span className="ml-auto text-ink-muted">
         {doc.canvas.label} · {doc.canvas.width}×{doc.canvas.height} ·{" "}

@@ -1,31 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --ink-bg: #0c0f0d;
-  --ink-surface: #151a17;
-  --ink-panel: #1c231e;
+  /* Night Press — charcoal chrome + warm paper stage (seed 2f41…) */
+  --ink-bg: #0e1210;
+  --ink-surface: #161c18;
+  --ink-panel: #1b221d;
   --ink-panel-2: #232b25;
-  --ink-border: #2a332c;
-  --ink-border-strong: #3a463d;
-  --ink-text: #e8ebe6;
-  --ink-muted: #8a948c;
-  --ink-lime: #9fe870;
+  --ink-border: #2c352f;
+  --ink-border-strong: #3d483f;
+  --ink-text: #eceee9;
+  --ink-muted: #8b958d;
+  --ink-lime: #a8e86a;
   --ink-lime-dim: #6faa4a;
-  --ink-amber: #e8a54b;
+  --ink-amber: #e0a045;
   --ink-danger: #e85d4b;
-  --ink-selection: #9fe870;
+  --ink-selection: #a8e86a;
+  --ink-paper: #e7e1d4;
+  --ink-paper-grid: #d4cec0;
+  --ink-well: #cfc7b6;
   --font-ui: "IBM Plex Sans", "Helvetica Neue", sans-serif;
-  --font-display: "Syne", "Arial Black", sans-serif;
+  --font-display: "Archivo Black", "Impact", sans-serif;
   --font-mono: "IBM Plex Mono", "Courier New", monospace;
 }
 
-@font-face {
-  font-family: "Syne";
-  src: url("/fonts/syne-700.woff2") format("woff2");
-  font-weight: 500 800;
-  font-style: normal;
-  font-display: swap;
-}
 @font-face {
   font-family: "IBM Plex Sans";
   src: url("/fonts/plex-sans.woff2") format("woff2");
@@ -61,6 +58,14 @@
   font-style: normal;
   font-display: swap;
 }
+/* Syne kept as optional canvas font only — not UI default */
+@font-face {
+  font-family: "Syne";
+  src: url("/fonts/syne-700.woff2") format("woff2");
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme inline {
   --color-ink-bg: var(--ink-bg);
@@ -75,13 +80,13 @@
   --color-ink-lime-dim: var(--ink-lime-dim);
   --color-ink-amber: var(--ink-amber);
   --color-ink-danger: var(--ink-danger);
+  --color-ink-paper: var(--ink-paper);
+  --color-ink-well: var(--ink-well);
   --font-sans: var(--font-ui);
   --font-mono: var(--font-mono);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html,
 body {
@@ -98,44 +103,30 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.07;
+  opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   z-index: 50;
 }
 
 @keyframes ink-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes ink-splash {
-  0% {
-    transform: scale(0.4);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 
 .animate-ink-in {
-  animation: ink-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: ink-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
 .animate-ink-splash {
   animation: ink-splash 0.7s ease-out forwards;
 }
 
 .template-card {
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  transition: transform 0.18s ease, border-color 0.18s ease;
 }
 .template-card:hover {
   transform: translateY(-2px);
@@ -147,25 +138,61 @@ body {
   color: var(--ink-bg);
 }
 
-.canvas-stage {
-  transition: transform 0.15s ease-out;
+/* Warm paper well — flat material (no decorative gradients) */
+.canvas-well {
+  background-color: var(--ink-paper);
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.canvas-stage {
+  transition: transform 0.15s ease-out;
+  box-shadow:
+    8px 10px 0 rgba(14, 18, 16, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
 }
-::-webkit-scrollbar-thumb {
-  background: var(--ink-border-strong);
-  border-radius: 0;
+
+.mark-word {
+  font-family: "Archivo Black", Impact, sans-serif;
+  letter-spacing: -0.02em;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--ink-border-strong); border-radius: 0; }
+::-webkit-scrollbar-track { background: transparent; }
 
 button:focus-visible,
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--ink-lime);
   outline-offset: 2px;
+}
+
+/* Tech 5 — pressman motion craft (not transitions.dev catalog) */
+@keyframes press-ink-settle {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes press-registration {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+.press-ink-settle {
+  animation: press-ink-settle 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.press-reg-mark {
+  animation: press-registration 2.8s ease-in-out infinite;
+}
+.press-video-matte {
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+}
+
+/* Phase B2 — job clarity (flat chrome; no glass/glow/gradients) */
+.job-tape {
+  letter-spacing: 0.16em;
+}
+.export-dock {
+  background: var(--ink-surface);
+  border: 1px solid var(--ink-border-strong);
+  box-shadow: 4px 4px 0 rgba(14, 18, 16, 0.5);
 }

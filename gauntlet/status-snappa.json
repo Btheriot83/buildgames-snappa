@@ -1,0 +1,52 @@
+{
+  "slug": "snappa",
+  "product": "Forge Ink",
+  "aesthetic": "Night Press",
+  "demoUrl": "https://buildgames-snappa.vercel.app",
+  "bar": "https://snappa.com/",
+  "repo": "https://github.com/Btheriot83/buildgames-snappa",
+  "branch": "feat/gauntlet-5",
+  "phaseA": {
+    "done": true,
+    "techniquesDone": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "identityPath": "docs/IDENTITY.md",
+    "discover": "docs/DISCOVER.md",
+    "define": "docs/DEFINE.md",
+    "deliver": "docs/DELIVER.md",
+    "imagesGenerated": [
+      "public/assets/empty-desk.jpg",
+      "public/assets/texture-square.jpg",
+      "public/assets/texture-story.jpg",
+      "public/assets/texture-wide.jpg",
+      "public/assets/press-loop.mp4"
+    ],
+    "criticFreshContext": true,
+    "mobbin": "paid-plan-blocked; bar=live snappa.com screenshots"
+  },
+  "phaseB": {
+    "roundsCompleted": 5,
+    "roundsTarget": 5,
+    "workbench": "apps/snappa/gauntlet/workbench.md",
+    "baselineScore": 3.8,
+    "finalExecutionScoreVsBar": 7.1,
+    "identityFrozen": true
+  },
+  "updatedAtPt": "2026-09-14 8:52 PM PT",
+  "status": "gauntlet_complete",
+  "demo_url": "https://buildgames-snappa.vercel.app",
+  "pr_url": "https://github.com/Btheriot83/buildgames-snappa/pull/3",
+  "prUrl": "https://github.com/Btheriot83/buildgames-snappa/pull/3",
+  "live_http": 200,
+  "path": "/workspace/build-games/apps/snappa",
+  "finishedAtPt": "2026-09-14 8:52 PM PT",
+  "notes": "Phase A Night Press locked once. Phase B 5 rounds under identity. Assist API wired to BUILD_GAMES_LLM_API_KEY on Vercel (configured:true). Provider may still reject key \u2014 UI honest, no fake AI. Do not message Brandon."
+}

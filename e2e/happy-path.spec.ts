@@ -7,8 +7,9 @@ test("first-visit template → canvas → export controls", async ({ page }) => 
     timeout: 30000,
   });
   await expect(
-    page.getByRole("heading", { name: /Pick a layout/i })
+    page.getByRole("heading", { name: /Compose\. Export/i })
   ).toBeVisible();
+  await expect(page.getByTestId("materials-tape")).toContainText(/Fixed size/i);
 
   await page.getByTestId("template-launch-poster").click();
   await expect(page.getByTestId("template-gallery")).toBeHidden({
@@ -20,6 +21,7 @@ test("first-visit template → canvas → export controls", async ({ page }) => 
 
   await expect(page.getByTestId("export-svg")).toBeVisible();
   await expect(page.getByTestId("export-pdf")).toBeVisible();
+  await expect(page.getByTestId("export-dock")).toBeVisible();
   await expect(page.getByTestId("ink-drops")).toContainText(/ink/i);
 
   await expect(page.getByTestId("status-bar")).toBeVisible();

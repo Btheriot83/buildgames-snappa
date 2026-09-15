@@ -112,8 +112,8 @@ export function Canvas() {
           name: "Text",
           width: 320,
           height: 80,
-          text: "New text",
-          fontFamily: "Syne",
+          text: "Your headline",
+          fontFamily: "Archivo Black",
           fontSize: 48,
           fontWeight: 700,
           fill: "#F4F7F2",
@@ -260,7 +260,7 @@ export function Canvas() {
   return (
     <div
       ref={containerRef}
-      className="relative h-full w-full overflow-hidden bg-[#0a0c0b]"
+      className="canvas-well relative h-full w-full overflow-hidden"
       style={{
         cursor:
           tool === "hand" || spaceDown
@@ -268,9 +268,6 @@ export function Canvas() {
             : tool === "select"
               ? "default"
               : "crosshair",
-        backgroundImage:
-          "radial-gradient(circle at 1px 1px, #1a211c 1px, transparent 0)",
-        backgroundSize: "24px 24px",
       }}
       onWheel={onWheel}
       onPointerDown={onPointerDown}
@@ -279,7 +276,7 @@ export function Canvas() {
       data-testid="canvas-stage"
     >
       <div
-        className="canvas-stage absolute origin-top-left shadow-2xl"
+        className="canvas-stage absolute origin-top-left"
         style={{
           transform: `translate(${viewport.panX}px, ${viewport.panY}px) scale(${viewport.zoom})`,
           width: doc.canvas.width,
@@ -305,7 +302,7 @@ export function Canvas() {
                 y1={0}
                 x2={g.position}
                 y2={doc.canvas.height}
-                stroke="#9FE870"
+                stroke="#A8E86A"
                 strokeWidth={1 / viewport.zoom}
                 strokeDasharray={`${4 / viewport.zoom} ${4 / viewport.zoom}`}
                 opacity={0.85}
@@ -317,7 +314,7 @@ export function Canvas() {
                 y1={g.position}
                 x2={doc.canvas.width}
                 y2={g.position}
-                stroke="#9FE870"
+                stroke="#A8E86A"
                 strokeWidth={1 / viewport.zoom}
                 strokeDasharray={`${4 / viewport.zoom} ${4 / viewport.zoom}`}
                 opacity={0.85}
@@ -404,17 +401,35 @@ function ElementNode({
     <g transform={transform}>
       {node}
       {selected && (
-        <rect
-          x={el.x}
-          y={el.y}
-          width={el.width}
-          height={el.height}
-          fill="none"
-          stroke="#9FE870"
-          strokeWidth={2}
-          strokeDasharray="6 4"
-          pointerEvents="none"
-        />
+        <g pointerEvents="none">
+          <rect
+            x={el.x}
+            y={el.y}
+            width={el.width}
+            height={el.height}
+            fill="none"
+            stroke="#A8E86A"
+            strokeWidth={2 / 1}
+            strokeDasharray="6 4"
+          />
+          {[
+            [el.x, el.y],
+            [el.x + el.width, el.y],
+            [el.x, el.y + el.height],
+            [el.x + el.width, el.y + el.height],
+          ].map(([hx, hy], i) => (
+            <rect
+              key={i}
+              x={hx - 6}
+              y={hy - 6}
+              width={12}
+              height={12}
+              fill="#A8E86A"
+              stroke="#0e1210"
+              strokeWidth={2}
+            />
+          ))}
+        </g>
       )}
     </g>
   );

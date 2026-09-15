@@ -3,7 +3,7 @@ import "./globals.css";
 import "./transitions.css";
 
 export const metadata: Metadata = {
-  title: "Forge Ink — local social graphics",
+  title: "Forge Ink — Night Press social graphics",
   description:
     "Compose fixed-size social graphics from local images, text, and templates. Export SVG or PDF. All data stays on your machine.",
 };
