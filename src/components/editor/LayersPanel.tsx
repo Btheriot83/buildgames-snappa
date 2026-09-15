@@ -38,7 +38,7 @@ export function LayersPanel() {
                 }`}
                 onClick={() => select([id])}
               >
-                <span className="w-14 shrink-0 font-mono text-[11px] uppercase text-ink-label">
+                <span className="w-14 shrink-0 font-mono text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-label">
                   {el.type}
                 </span>
                 <span className="truncate font-medium">{el.name}</span>
