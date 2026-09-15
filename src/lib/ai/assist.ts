@@ -62,7 +62,7 @@ function resolveProvider(): Provider | null {
         name: "openrouter",
         extraHeaders: {
           "HTTP-Referer": "https://buildgames-snappa.vercel.app",
-          "X-Title": "Build Games — Forge Ink",
+          "X-Title": "Build Games Forge Ink",
         },
       };
     }
@@ -89,7 +89,7 @@ function resolveProvider(): Provider | null {
       name: "openrouter",
       extraHeaders: {
         "HTTP-Referer": "https://buildgames-snappa.vercel.app",
-        "X-Title": "Build Games — Forge Ink",
+        "X-Title": "Build Games Forge Ink",
       },
     };
   }
@@ -115,7 +115,7 @@ function resolveProvider(): Provider | null {
       name: "openrouter-fallback",
       extraHeaders: {
         "HTTP-Referer": "https://buildgames-snappa.vercel.app",
-        "X-Title": "Build Games — Forge Ink",
+        "X-Title": "Build Games Forge Ink",
       },
     };
   }
