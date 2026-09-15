@@ -1,0 +1,77 @@
+{
+  "slug": "snappa",
+  "product": "Forge Ink",
+  "aesthetic": "Night Press",
+  "identityFrozen": true,
+  "reseeded": false,
+  "demoUrl": "https://buildgames-snappa.vercel.app",
+  "bar": "https://snappa.com/",
+  "repo": "https://github.com/Btheriot83/buildgames-snappa",
+  "branch": "feat/gauntlet-r4",
+  "roundsCounted": 20,
+  "roundShas": [
+    "304d52f",
+    "db2903d",
+    "8e2fabd",
+    "4da8023",
+    "77b8d48",
+    "5902fea",
+    "82ca1e5",
+    "dfe4dcb",
+    "2a25967",
+    "48801ec",
+    "64a9aea",
+    "730cff9",
+    "f465f4d",
+    "ad86926",
+    "b228041",
+    "8fd7f9a",
+    "e2e401e",
+    "d3d901d",
+    "4c990bf",
+    "856ee57"
+  ],
+  "shotCount": 32,
+  "barShotRounds": [
+    1,
+    5,
+    10,
+    15,
+    20
+  ],
+  "honestNotes": [
+    "Prior B3 twenty rounds were batched; this R4 is separate rN commits with shots.",
+    "Snappa.com still wins marketing light theme, stock library, and photo templates.",
+    "Candidate wins Night Press editor craft, compose\u2192export weight, flat chrome.",
+    "Dream-loop target generated from live baseline via Higgsfield gpt_image_2_5; rounds 11\u201320 closed toward it.",
+    "transitions.dev free recipes wired to real actions (export success, assist error, gallery open, hydrate, tilt, counters)."
+  ],
+  "dreamLoop": {
+    "baseline": "apps/snappa/.dream-loop/baseline.png",
+    "target": "apps/snappa/.dream-loop/target.png",
+    "targetRefCommitted": "gauntlet/shots-r4/dream-target-ref.png",
+    "jobId": "08977d32-1eb6-4154-bdeb-340de2873205"
+  },
+  "transitions": {
+    "success-check": "SuccessSplash on export",
+    "toast": "SuccessSplash on export",
+    "error-state-shake": "EditorApp error + AssistPanel brief",
+    "panel-reveal": "TemplateGallery",
+    "card-tilt": "TiltCard templates",
+    "number-pop-in": "InkDropCounter",
+    "texts-reveal": "TemplateGallery headline (r16)",
+    "skeleton-reveal": "hydrate overlay (r16)"
+  },
+  "phaseB4": {
+    "roundsCompleted": 20,
+    "roundsTarget": 20,
+    "workbench": "apps/snappa/gauntlet/workbench-r4.md"
+  },
+  "status": "gauntlet_r4_integrity_complete",
+  "doNotMessageBrandon": true,
+  "path": "/workspace/build-games/apps/snappa",
+  "updatedAtPt": "2026-09-14 10:15 PM PT",
+  "finishedAtPt": "2026-09-14 10:15 PM PT",
+  "finishedAtUtc": "2026-09-15T05:16:07Z",
+  "sha": "856ee57"
+}
