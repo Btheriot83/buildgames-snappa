@@ -202,20 +202,20 @@ textarea:focus-visible {
 /* Phase B3 — type ladder + button weight + contrast (flat, no gradients) */
 .ui-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.25;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-label);
 }
 .ui-caption {
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--ink-muted);
 }
 .ui-body {
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--ink-text);
 }
 .ui-title {
