@@ -8,9 +8,9 @@
   "bar": "https://snappa.com/",
   "repo": "https://github.com/Btheriot83/buildgames-snappa",
   "branch": "feat/gauntlet-r3",
-  "prUrl": null,
-  "pr_url": null,
-  "sha": "f2748fc",
+  "prUrl": "https://github.com/Btheriot83/buildgames-snappa/pull/5",
+  "pr_url": "https://github.com/Btheriot83/buildgames-snappa/pull/5",
+  "sha": "c12cc7b",
   "live_http": null,
   "phaseA": {
     "done": true,
@@ -66,9 +66,9 @@
   "status": "gauntlet_r3_complete",
   "readyForWalkthroughVideo": false,
   "doNotMessageBrandon": true,
-  "updatedAtPt": "2026-09-14 9:37 PM PT",
-  "finishedAtPt": "2026-09-14 9:37 PM PT",
-  "finishedAtUtc": "2026-09-15T04:37:51Z",
+  "updatedAtPt": "2026-09-14 9:38 PM PT",
+  "finishedAtPt": "2026-09-14 9:38 PM PT",
+  "finishedAtUtc": "2026-09-15T04:38:31Z",
   "path": "/workspace/build-games/apps/snappa",
   "notes": "Phase B3 twenty rounds under locked Night Press. Fonts/contrast/buttons + A/B vs snappa.com. Flat chrome. Do not message Brandon."
 }
