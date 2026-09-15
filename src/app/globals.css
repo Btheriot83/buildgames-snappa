@@ -154,7 +154,7 @@ body {
 
 .mark-word {
   font-family: "Archivo Black", Impact, sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -228,7 +228,7 @@ textarea:focus-visible {
 }
 .mark-word {
   font-family: "Archivo Black", Impact, sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 /* Card titles use UI sans — Archivo reserved for mark + canvas posters */
 .card-title {

@@ -152,7 +152,7 @@ export function Toolbar() {
   return (
     <header className="flex h-12 shrink-0 items-center gap-2 border-b border-ink-border-strong bg-ink-surface px-3">
       <div className="mr-1 flex items-center gap-2 border-r border-ink-border-strong pr-3">
-        <span className="mark-word text-lg text-ink-lime">Forge Ink</span>
+        <span className="mark-word text-xl text-ink-lime">Forge Ink</span>
         <span className="ui-label hidden sm:inline">
           night press
         </span>
