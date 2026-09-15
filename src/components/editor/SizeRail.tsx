@@ -19,7 +19,7 @@ export function SizeRail() {
 
   return (
     <div
-      className="absolute left-3 top-3 z-10 flex max-w-[min(100%,48rem)] flex-wrap items-center gap-1 rounded-sm border border-ink-border-strong bg-ink-surface px-2 py-1.5"
+      className="absolute left-3 top-3 z-10 flex max-w-[min(100%,48rem)] flex-wrap items-center gap-1.5 rounded-sm border-2 border-ink-border-strong bg-ink-surface px-2.5 py-2"
       data-testid="size-rail"
     >
       <span className="ui-label mr-1 text-ink-lime">
@@ -39,7 +39,7 @@ export function SizeRail() {
           >
             {p.label.replace("Instagram ", "IG ").replace("LinkedIn / ", "")}
             <span
-              className={`ml-1 font-mono text-[10px] ${active ? "text-ink-bg" : "text-ink-muted"}`}
+              className={`ml-1 font-mono text-[11px] ${active ? "text-ink-bg" : "text-ink-muted"}`}
             >
               {p.width}×{p.height}
             </span>
