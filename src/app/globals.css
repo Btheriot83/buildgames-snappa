@@ -129,10 +129,11 @@ body {
 
 .template-card {
   transition: transform 0.18s ease, border-color 0.18s ease;
+  border: 1px solid var(--ink-border-strong);
 }
 .template-card:hover {
   transform: translateY(-2px);
-  border-color: var(--ink-lime-dim);
+  border-color: var(--ink-lime);
 }
 
 .tool-btn[data-active="true"] {
@@ -295,7 +296,7 @@ textarea:focus-visible {
   font-weight: 600;
   line-height: 1;
 }
-.btn-amber:hover { filter: brightness(0.95); }
+.btn-amber:hover { background: #d49a3f; border-color: #d49a3f; }
 .btn-amber:disabled { opacity: 0.45; filter: none; }
 
 .btn-ghost {
@@ -305,9 +306,9 @@ textarea:focus-visible {
   min-height: 32px;
   padding: 0.35rem 0.65rem;
   border-radius: 2px;
-  border: 1px solid transparent;
+  border: 1px solid var(--ink-border);
   background: transparent;
-  color: var(--ink-muted);
+  color: var(--ink-label);
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
