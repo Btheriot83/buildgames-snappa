@@ -343,16 +343,18 @@ textarea:focus-visible {
 }
 
 .tool-btn {
-  min-height: 30px;
-  border: 1px solid transparent;
+  min-height: 34px;
+  border: 1px solid var(--ink-border);
   font-size: 12px;
   font-weight: 500;
+  background: var(--ink-panel);
+  color: var(--ink-label);
 }
 .tool-btn[data-active="true"] {
   background: var(--ink-lime);
   color: var(--ink-bg);
   border-color: var(--ink-lime);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .panel-head {
