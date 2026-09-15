@@ -1,22 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { STARTER_TEMPLATES, inkWashDataUrl } from "@/lib/templates/starters";
 import { useEditorStore } from "@/store/editorStore";
+import { TiltCard } from "./TiltCard";
 
 export function TemplateGallery() {
   const show = useEditorStore((s) => s.showTemplates);
   const loadTemplate = useEditorStore((s) => s.loadTemplate);
   const setShowTemplates = useEditorStore((s) => s.setShowTemplates);
   const newBlank = useEditorStore((s) => s.newBlank);
+  const [mounted, setMounted] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  if (!show) return null;
+  useEffect(() => {
+    if (show) {
+      setMounted(true);
+      const id = requestAnimationFrame(() => setOpen(true));
+      return () => cancelAnimationFrame(id);
+    }
+    setOpen(false);
+    const t = setTimeout(() => setMounted(false), 320);
+    return () => clearTimeout(t);
+  }, [show]);
+
+  if (!mounted) return null;
 
   return (
     <div
       className="absolute inset-0 z-40 flex items-center justify-center bg-[#0c0f0d]/88 p-6 backdrop-blur-[2px]"
       data-testid="template-gallery"
     >
-      <div className="ink-grain relative max-h-[90vh] w-full max-w-4xl overflow-hidden border border-ink-border bg-ink-surface animate-ink-in">
+      <div
+        className="t-panel-slide ink-grain relative max-h-[90vh] w-full max-w-4xl overflow-hidden border border-ink-border bg-ink-surface"
+        data-open={open ? "true" : "false"}
+        style={{ ["--panel-translate-y" as string]: "24px" }}
+      >
         <div className="flex items-end justify-between border-b border-ink-border px-6 py-5">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-lime">
@@ -44,22 +63,21 @@ export function TemplateGallery() {
 
         <div className="grid max-h-[60vh] grid-cols-1 gap-3 overflow-y-auto p-6 sm:grid-cols-2 lg:grid-cols-3">
           {STARTER_TEMPLATES.map((t, i) => (
-            <button
+            <TiltCard
               key={t.id}
-              type="button"
-              className="template-card group flex flex-col overflow-hidden border border-ink-border bg-ink-panel text-left"
-              style={{ animationDelay: `${i * 40}ms` }}
+              testId={`template-${t.id}`}
               onClick={() => loadTemplate(t.id)}
-              data-testid={`template-${t.id}`}
+              className="template-card"
             >
               <div
                 className="relative h-28 w-full overflow-hidden"
                 style={{
                   backgroundImage: `url("${inkWashDataUrl(400, 160, i % 2 === 0 ? "#9FE870" : "#E8A54B", "#121812")}")`,
                   backgroundSize: "cover",
+                  animationDelay: `${i * 40}ms`,
                 }}
               >
-                <span className="absolute bottom-2 left-2 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-bg bg-ink-lime px-1.5 py-0.5">
+                <span className="absolute bottom-2 left-2 bg-ink-lime px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-bg">
                   {t.category}
                 </span>
               </div>
@@ -74,7 +92,7 @@ export function TemplateGallery() {
                   {t.blurb}
                 </span>
               </div>
-            </button>
+            </TiltCard>
           ))}
         </div>
 
