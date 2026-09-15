@@ -40,7 +40,7 @@ export function StatusBar() {
 
   return (
     <div
-      className="flex h-9 shrink-0 items-center gap-3 border-t border-ink-border-strong bg-ink-surface px-3 font-mono text-xs"
+      className="flex h-10 shrink-0 items-center gap-3 border-t border-ink-border-strong bg-ink-surface px-3 font-mono text-[13px]"
       data-testid="status-bar"
     >
       <span className={tone}>

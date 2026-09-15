@@ -93,7 +93,7 @@ export function EditorApp() {
       <div className="relative z-10 flex h-full flex-col">
         {/* Materials tape — Night Press job strip, spottable in ≤3s */}
         <div
-          className="job-tape flex h-8 shrink-0 items-center gap-3 overflow-hidden border-b border-ink-border-strong bg-[#121812] px-3 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-lime"
+          className="job-tape flex h-9 shrink-0 items-center gap-3 overflow-hidden border-b border-ink-border-strong bg-[#121812] px-3 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-lime"
           data-testid="materials-tape"
         >
           <span className="text-ink-amber">Night Press</span>
