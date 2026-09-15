@@ -64,7 +64,7 @@ export function TemplateGallery() {
             <p className="ui-label text-ink-lime">
               Night Press · start
             </p>
-            <h2 className="mark-word mt-1 text-3xl tracking-tight text-ink-text sm:text-4xl">
+            <h2 className="mark-word mt-1 text-4xl tracking-tight text-ink-text sm:text-5xl">
               Compose. Export.
             </h2>
             <p className="ui-body mt-2 max-w-xl text-ink-muted">
