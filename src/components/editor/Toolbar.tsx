@@ -8,6 +8,7 @@ import { exportPdf } from "@/lib/export/pdf";
 import { safeFilename } from "@/lib/transforms";
 import { createId } from "@/lib/id";
 import { saveAs } from "file-saver";
+import { InkDropCounter } from "./InkDropCounter";
 
 const TOOLS: { id: Tool; label: string; shortcut: string }[] = [
   { id: "select", label: "Select", shortcut: "V" },
@@ -233,7 +234,9 @@ export function Toolbar() {
           data-testid="ink-drops"
         >
           <span className="inline-block h-2 w-2 rounded-full bg-ink-lime" />
-          {inkDrops} ink · {exportsCount} exports
+          <InkDropCounter value={inkDrops} suffix="ink" />
+          <span>·</span>
+          <InkDropCounter value={exportsCount} suffix="exports" />
         </div>
 
         <button

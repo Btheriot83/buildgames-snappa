@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./transitions.css";
 
 export const metadata: Metadata = {
   title: "Forge Ink — local social graphics",

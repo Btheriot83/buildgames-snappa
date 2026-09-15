@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useEditorStore } from "@/store/editorStore";
 import { Canvas } from "./Canvas";
 import { Toolbar } from "./Toolbar";
@@ -21,6 +21,20 @@ export function EditorApp() {
   const hydrated = useEditorStore((s) => s.hydrated);
   const status = useEditorStore((s) => s.status);
   const setStatus = useEditorStore((s) => s.setStatus);
+  const errorShakeRef = useRef<HTMLDivElement>(null);
+  const statusMessage = useEditorStore((s) => s.statusMessage);
+
+  useEffect(() => {
+    if (status !== "error") return;
+    const el = errorShakeRef.current;
+    if (!el) return;
+    el.classList.add("is-error");
+    el.classList.remove("is-shaking");
+    void el.offsetWidth;
+    el.classList.add("is-shaking");
+    const t = setTimeout(() => el.classList.remove("is-shaking"), 320);
+    return () => clearTimeout(t);
+  }, [status, statusMessage]);
 
   useEffect(() => {
     void hydrate();
@@ -92,14 +106,15 @@ export function EditorApp() {
             )}
             {status === "error" && (
               <div
-                className="absolute left-1/2 top-4 z-30 max-w-md -translate-x-1/2 animate-ink-in border border-ink-danger/50 bg-ink-panel px-4 py-3 text-sm text-ink-danger shadow-lg"
+                ref={errorShakeRef}
+                className="t-input absolute left-1/2 top-4 z-30 max-w-md -translate-x-1/2 border border-ink-danger/50 bg-ink-panel px-4 py-3 text-sm text-ink-danger shadow-lg is-error"
                 role="alert"
                 data-testid="error-state"
               >
                 <p className="font-medium">Something went wrong</p>
                 <p className="mt-1 text-xs text-ink-muted">
-                  You can dismiss and keep editing — data stays local when
-                  storage is available.
+                  {statusMessage ||
+                    "You can dismiss and keep editing — data stays local when storage is available."}
                 </p>
                 <button
                   type="button"
