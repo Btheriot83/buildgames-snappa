@@ -221,10 +221,10 @@ textarea:focus-visible {
 }
 .ui-title {
   font-family: var(--font-ui);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--ink-text);
 }
 .mark-word {

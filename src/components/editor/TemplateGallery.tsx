@@ -156,7 +156,7 @@ export function TemplateGallery() {
             ))}
             <button
               type="button"
-              className="btn-secondary border-ink-lime-dim text-ink-lime"
+              className="btn-primary"
               onClick={() => {
                 newBlank();
                 setShowTemplates(false);
