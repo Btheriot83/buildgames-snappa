@@ -1,0 +1,74 @@
+{
+  "slug": "snappa",
+  "product": "Forge Ink",
+  "aesthetic": "Night Press",
+  "identityFrozen": true,
+  "reseeded": false,
+  "demoUrl": "https://buildgames-snappa.vercel.app",
+  "bar": "https://snappa.com/",
+  "repo": "https://github.com/Btheriot83/buildgames-snappa",
+  "branch": "feat/gauntlet-r3",
+  "prUrl": null,
+  "pr_url": null,
+  "sha": "fb8fcf1",
+  "live_http": null,
+  "phaseA": {
+    "done": true,
+    "techniquesDone": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "identityPath": "docs/IDENTITY.md"
+  },
+  "phaseB": {
+    "roundsCompleted": 5,
+    "roundsTarget": 5,
+    "workbench": "apps/snappa/gauntlet/workbench.md"
+  },
+  "phaseB2": {
+    "roundsCompleted": 10,
+    "roundsTarget": 10,
+    "workbench": "apps/snappa/gauntlet/workbench-r2.md"
+  },
+  "phaseB3": {
+    "roundsCompleted": 20,
+    "roundsTarget": 20,
+    "workbench": "apps/snappa/gauntlet/workbench-r3.md",
+    "visibleDelta": "apps/snappa/gauntlet/VISIBLE_DELTA_R3.md",
+    "focus": [
+      "fonts / type ladder",
+      "contrast that holds",
+      "primary/secondary buttons",
+      "close A/B vs snappa.com screenshots",
+      "flat no-gradient"
+    ],
+    "antiSlop": {
+      "gradientsStripped": true,
+      "glassBlurKilled": true,
+      "glowKilled": true
+    },
+    "barShots": [
+      "gauntlet/shots/b3-bar-snappa-home.png",
+      "gauntlet/shots/b3-bar-snappa-create.png"
+    ]
+  },
+  "assist": {
+    "configured": true,
+    "openRouterRoute": true,
+    "note": "Unchanged from B2; honesty on provider auth."
+  },
+  "status": "gauntlet_r3_complete",
+  "readyForWalkthroughVideo": false,
+  "doNotMessageBrandon": true,
+  "updatedAtPt": "2026-09-14 9:37 PM PT",
+  "finishedAtPt": "2026-09-14 9:37 PM PT",
+  "finishedAtUtc": "2026-09-15T04:37:51Z",
+  "path": "/workspace/build-games/apps/snappa",
+  "notes": "Phase B3 twenty rounds under locked Night Press. Fonts/contrast/buttons + A/B vs snappa.com. Flat chrome. Do not message Brandon."
+}

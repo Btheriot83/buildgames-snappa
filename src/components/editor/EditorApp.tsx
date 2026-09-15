@@ -93,7 +93,7 @@ export function EditorApp() {
       <div className="relative z-10 flex h-full flex-col">
         {/* Materials tape — Night Press job strip, spottable in ≤3s */}
         <div
-          className="job-tape flex h-7 shrink-0 items-center gap-3 overflow-hidden border-b border-ink-lime/25 bg-[#121812] px-3 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-lime"
+          className="job-tape flex h-8 shrink-0 items-center gap-3 overflow-hidden border-b border-ink-border-strong bg-[#121812] px-3 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-lime"
           data-testid="materials-tape"
         >
           <span className="text-ink-amber">Night Press</span>
@@ -111,7 +111,7 @@ export function EditorApp() {
         </div>
         <Toolbar />
         <div className="flex min-h-0 flex-1">
-          <aside className="hidden w-56 shrink-0 border-r border-ink-border bg-ink-surface/95 md:block">
+          <aside className="hidden w-56 shrink-0 border-r border-ink-border-strong bg-ink-surface md:block">
             <LayersPanel />
           </aside>
           <main className="relative min-w-0 flex-1">
@@ -120,7 +120,7 @@ export function EditorApp() {
                 className="absolute inset-0 z-20 flex items-center justify-center bg-ink-bg/80"
                 data-testid="loading-state"
               >
-                <p className="animate-pulse font-mono text-sm text-ink-muted">
+                <p className="animate-pulse font-mono text-sm text-ink-label">
                   Opening IndexedDB…
                 </p>
               </div>
@@ -128,7 +128,7 @@ export function EditorApp() {
             {status === "error" && (
               <div
                 ref={errorShakeRef}
-                className="t-input absolute left-1/2 top-4 z-30 max-w-md -translate-x-1/2 border border-ink-danger/50 bg-ink-panel px-4 py-3 text-sm text-ink-danger shadow-lg is-error"
+                className="t-input absolute left-1/2 top-4 z-30 max-w-md -translate-x-1/2 border border-ink-danger bg-ink-panel px-4 py-3 text-sm text-ink-danger is-error"
                 role="alert"
                 data-testid="error-state"
               >
@@ -139,7 +139,7 @@ export function EditorApp() {
                 </p>
                 <button
                   type="button"
-                  className="mt-2 text-xs text-ink-amber underline"
+                  className="btn-ghost mt-2 text-ink-amber"
                   onClick={() => setStatus("idle", "")}
                 >
                   Continue editing
@@ -153,7 +153,7 @@ export function EditorApp() {
             <TemplateGallery />
             <SuccessSplash />
           </main>
-          <aside className="hidden w-64 shrink-0 border-l border-ink-border bg-ink-surface/95 lg:block">
+          <aside className="hidden w-64 shrink-0 border-l border-ink-border-strong bg-ink-surface lg:block">
             <PropertiesPanel />
           </aside>
         </div>

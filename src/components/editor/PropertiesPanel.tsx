@@ -22,25 +22,25 @@ export function PropertiesPanel() {
 
   return (
     <div className="flex h-full flex-col overflow-y-auto">
-      <div className="border-b border-ink-border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-muted">
+      <div className="panel-head">
         Properties
       </div>
 
-      <section className="space-y-2 border-b border-ink-border p-3">
-        <label className="block text-[10px] uppercase tracking-wider text-ink-muted">
+      <section className="space-y-2 border-b border-ink-border-strong p-3">
+        <label className="ui-label block">
           Project
         </label>
         <input
-          className="w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1.5 text-sm text-ink-text"
+          className="field-input"
           value={doc.meta.name}
           onChange={(e) => setName(e.target.value)}
           data-testid="project-name"
         />
-        <label className="block text-[10px] uppercase tracking-wider text-ink-muted">
+        <label className="ui-label block">
           Canvas
         </label>
         <select
-          className="w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1.5 text-sm"
+          className="field-input"
           value={`${doc.canvas.width}x${doc.canvas.height}`}
           onChange={(e) => {
             const preset = CANVAS_PRESETS.find(
@@ -55,20 +55,20 @@ export function PropertiesPanel() {
             </option>
           ))}
         </select>
-        <label className="block text-[10px] uppercase tracking-wider text-ink-muted">
+        <label className="ui-label block">
           Background
         </label>
         <input
           type="color"
           value={doc.background.slice(0, 7)}
           onChange={(e) => setBackground(e.target.value)}
-          className="h-8 w-full cursor-pointer rounded-sm border border-ink-border bg-transparent"
+          className="h-9 w-full cursor-pointer rounded-sm border border-ink-border-strong bg-transparent"
         />
       </section>
 
       {selected.length > 1 && (
-        <section className="space-y-2 border-b border-ink-border p-3">
-          <p className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <section className="space-y-2 border-b border-ink-border-strong p-3">
+          <p className="ui-label">
             Align ({selected.length})
           </p>
           <div className="grid grid-cols-3 gap-1">
@@ -85,7 +85,7 @@ export function PropertiesPanel() {
               <button
                 key={mode}
                 type="button"
-                className="rounded-sm border border-ink-border px-1 py-1 text-[10px] hover:border-ink-lime-dim"
+                className="btn-chip min-h-[28px] w-full justify-center"
                 onClick={() => alignSelected(mode)}
               >
                 {label}
@@ -94,14 +94,14 @@ export function PropertiesPanel() {
           </div>
           <button
             type="button"
-            className="w-full rounded-sm border border-ink-border py-1.5 text-xs hover:border-ink-lime-dim"
+            className="btn-secondary w-full"
             onClick={groupSelected}
           >
             Group
           </button>
           <button
             type="button"
-            className="w-full rounded-sm border border-ink-danger/40 py-1.5 text-xs text-ink-danger"
+            className="btn-secondary w-full border-ink-danger text-ink-danger"
             onClick={deleteSelected}
           >
             Delete
@@ -110,7 +110,7 @@ export function PropertiesPanel() {
       )}
 
       {!el && selected.length <= 1 && (
-        <p className="px-3 py-6 text-center text-xs leading-relaxed text-ink-muted">
+        <p className="ui-caption px-3 py-6 text-center leading-relaxed">
           Nothing selected. Click type on the sheet, or ask the pressman below for copy that fits this size.
         </p>
       )}
@@ -169,7 +169,7 @@ export function PropertiesPanel() {
 
           <button
             type="button"
-            className="mt-2 w-full rounded-sm border border-ink-danger/40 py-1.5 text-xs text-ink-danger"
+            className="btn-secondary mt-2 w-full border-ink-danger text-ink-danger"
             onClick={deleteSelected}
           >
             Delete
@@ -192,11 +192,11 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+      <span className="ui-label">
         {label}
       </span>
       <input
-        className="mt-0.5 w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1 text-sm"
+        className="field-input mt-0.5"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
@@ -221,7 +221,7 @@ function Num({
 }) {
   return (
     <label className="block">
-      <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+      <span className="ui-label">
         {label}
       </span>
       <input
@@ -229,7 +229,7 @@ function Num({
         step={step}
         min={min}
         max={max}
-        className="mt-0.5 w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1 font-mono text-sm"
+        className="field-input mt-0.5 font-mono"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
       />
@@ -247,22 +247,22 @@ function TextProps({
   return (
     <>
       <label className="block">
-        <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <span className="ui-label">
           Text
         </span>
         <textarea
-          className="mt-0.5 w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1 text-sm"
+          className="field-input mt-0.5"
           rows={3}
           value={el.text}
           onChange={(e) => onChange(el.id, { text: e.target.value })}
         />
       </label>
       <label className="block">
-        <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <span className="ui-label">
           Font
         </span>
         <select
-          className="mt-0.5 w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1 text-sm"
+          className="field-input mt-0.5"
           value={el.fontFamily}
           onChange={(e) => onChange(el.id, { fontFamily: e.target.value })}
         >
@@ -287,7 +287,7 @@ function TextProps({
         onChange={(v) => onChange(el.id, { fontWeight: v })}
       />
       <label className="block">
-        <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <span className="ui-label">
           Fill
         </span>
         <input
@@ -298,11 +298,11 @@ function TextProps({
         />
       </label>
       <label className="block">
-        <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <span className="ui-label">
           Align
         </span>
         <select
-          className="mt-0.5 w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1 text-sm"
+          className="field-input mt-0.5"
           value={el.align}
           onChange={(e) =>
             onChange(el.id, {
@@ -329,7 +329,7 @@ function RectProps({
   return (
     <>
       <label className="block">
-        <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <span className="ui-label">
           Fill
         </span>
         <input
@@ -363,7 +363,7 @@ function CircleProps({
   return (
     <>
       <label className="block">
-        <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+        <span className="ui-label">
           Fill
         </span>
         <input
@@ -380,7 +380,7 @@ function CircleProps({
       />
       {el.strokeWidth > 0 && (
         <label className="block">
-          <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+          <span className="ui-label">
             Stroke
           </span>
           <input
@@ -404,11 +404,11 @@ function ImageProps({
 }) {
   return (
     <label className="block">
-      <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+      <span className="ui-label">
         Fit
       </span>
       <select
-        className="mt-0.5 w-full rounded-sm border border-ink-border bg-ink-bg px-2 py-1 text-sm"
+        className="field-input mt-0.5"
         value={el.objectFit}
         onChange={(e) =>
           onChange(el.id, {

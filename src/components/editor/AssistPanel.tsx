@@ -73,14 +73,14 @@ export function AssistPanel() {
 
   return (
     <section
-      className="space-y-2 border-t border-ink-border p-3"
+      className="space-y-2 border-t border-ink-border-strong p-3"
       data-testid="assist-panel"
     >
       <div className="flex items-center justify-between">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-amber">
+        <p className="ui-label text-ink-amber">
           Pressman assist
         </p>
-        <span className="font-mono text-[9px] text-ink-muted">
+        <span className="font-mono text-[11px] text-ink-label">
           {doc.canvas.width}×{doc.canvas.height}
           {" · "}
           {configured === null
@@ -90,13 +90,13 @@ export function AssistPanel() {
               : "key missing"}
         </span>
       </div>
-      <p className="text-[11px] leading-snug text-ink-muted">
+      <p className="ui-caption leading-snug">
         {configured
           ? "Real layout/copy sized to this canvas. No canned filler."
           : "Add BUILD_GAMES_LLM_API_KEY (OpenRouter) on the server to unlock proofs."}
       </p>
       <textarea
-        className="min-h-[64px] w-full resize-y rounded-sm border border-ink-border bg-ink-bg px-2 py-1.5 text-xs text-ink-text"
+        className="field-input min-h-[72px] resize-y text-[13px]"
         placeholder={BRIEF_EXAMPLES[0]}
         value={brief}
         onChange={(e) => setBrief(e.target.value)}
@@ -107,7 +107,7 @@ export function AssistPanel() {
           <button
             key={ex}
             type="button"
-            className="rounded-sm border border-ink-border px-1.5 py-0.5 text-[9px] text-ink-muted hover:border-ink-amber hover:text-ink-amber"
+            className="btn-chip hover:border-ink-amber hover:text-ink-amber"
             onClick={() => setBrief(ex)}
           >
             {ex.split("—")[0].trim().slice(0, 28)}…
@@ -117,14 +117,14 @@ export function AssistPanel() {
       <button
         type="button"
         disabled={busy}
-        className="w-full rounded-sm bg-ink-amber px-2 py-1.5 text-xs font-semibold text-ink-bg disabled:opacity-50"
+        className="btn-amber w-full disabled:opacity-50"
         onClick={() => void run()}
         data-testid="assist-run"
       >
         {busy ? "Pulling proofs…" : "Suggest copy & layout"}
       </button>
       {error && (
-        <p className="text-[11px] text-ink-danger" role="alert">
+        <p className="ui-caption text-ink-danger" role="alert">
           {error}
         </p>
       )}
@@ -132,7 +132,7 @@ export function AssistPanel() {
         <div className="space-y-2 text-xs">
           {result.headlines.length > 0 && (
             <div>
-              <p className="mb-1 font-mono text-[9px] uppercase tracking-wider text-ink-muted">
+              <p className="ui-label mb-1">
                 Headlines
               </p>
               <ul className="space-y-1">
@@ -140,7 +140,7 @@ export function AssistPanel() {
                   <li key={h}>
                     <button
                       type="button"
-                      className="w-full rounded-sm border border-ink-border px-2 py-1 text-left hover:border-ink-lime-dim"
+                      className="btn-secondary w-full justify-start text-left text-[12px]"
                       onClick={() => applyAssistText("headline", h)}
                     >
                       {h}
@@ -152,7 +152,7 @@ export function AssistPanel() {
           )}
           {result.subheads.length > 0 && (
             <div>
-              <p className="mb-1 font-mono text-[9px] uppercase tracking-wider text-ink-muted">
+              <p className="ui-label mb-1">
                 Subheads
               </p>
               <ul className="space-y-1">
@@ -160,7 +160,7 @@ export function AssistPanel() {
                   <li key={h}>
                     <button
                       type="button"
-                      className="w-full rounded-sm border border-ink-border px-2 py-1 text-left hover:border-ink-lime-dim"
+                      className="btn-secondary w-full justify-start text-left text-[12px]"
                       onClick={() => applyAssistText("subhead", h)}
                     >
                       {h}
@@ -173,7 +173,7 @@ export function AssistPanel() {
           {result.headlines[0] && (
             <button
               type="button"
-              className="w-full rounded-sm border border-ink-lime-dim px-2 py-1.5 text-xs text-ink-lime"
+              className="btn-secondary w-full border-ink-lime-dim text-ink-lime"
               onClick={() => {
                 if (result.headlines[0])
                   applyAssistText("headline", result.headlines[0]);
@@ -188,7 +188,7 @@ export function AssistPanel() {
           )}
           {result.ctas.length > 0 && (
             <div>
-              <p className="mb-1 font-mono text-[9px] uppercase tracking-wider text-ink-muted">
+              <p className="ui-label mb-1">
                 CTAs
               </p>
               <ul className="space-y-1">
@@ -196,7 +196,7 @@ export function AssistPanel() {
                   <li key={h}>
                     <button
                       type="button"
-                      className="w-full rounded-sm border border-ink-border px-2 py-1 text-left hover:border-ink-lime-dim"
+                      className="btn-secondary w-full justify-start text-left text-[12px]"
                       onClick={() => applyAssistText("cta", h)}
                     >
                       {h}
@@ -208,7 +208,7 @@ export function AssistPanel() {
           )}
           {result.layoutNotes.length > 0 && (
             <div>
-              <p className="mb-1 font-mono text-[9px] uppercase tracking-wider text-ink-muted">
+              <p className="ui-label mb-1">
                 Layout notes
               </p>
               <ul className="list-disc space-y-0.5 pl-4 text-ink-muted">
@@ -218,7 +218,7 @@ export function AssistPanel() {
               </ul>
             </div>
           )}
-          <p className="font-mono text-[9px] text-ink-muted">
+          <p className="font-mono text-[11px] text-ink-muted">
             via {result.provider} · {result.model}
           </p>
         </div>

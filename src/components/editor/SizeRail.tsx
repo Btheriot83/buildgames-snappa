@@ -19,10 +19,10 @@ export function SizeRail() {
 
   return (
     <div
-      className="absolute left-3 top-3 z-10 flex max-w-[min(100%,48rem)] flex-wrap items-center gap-1 rounded-sm border border-ink-border bg-ink-surface px-2 py-1.5"
+      className="absolute left-3 top-3 z-10 flex max-w-[min(100%,48rem)] flex-wrap items-center gap-1 rounded-sm border border-ink-border-strong bg-ink-surface px-2 py-1.5"
       data-testid="size-rail"
     >
-      <span className="mr-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-lime">
+      <span className="ui-label mr-1 text-ink-lime">
         Size
       </span>
       {CANVAS_PRESETS.map((p) => {
@@ -33,17 +33,13 @@ export function SizeRail() {
             key={p.label}
             type="button"
             data-active={active ? "true" : "false"}
-            className={`rounded-sm px-2 py-1 text-[10px] ${
-              active
-                ? "bg-ink-lime text-ink-bg"
-                : "text-ink-muted hover:bg-ink-panel hover:text-ink-text"
-            }`}
+            className="btn-chip"
             onClick={() => setCanvasSize(p.width, p.height, p.label)}
             title={`${p.width}×${p.height}`}
           >
             {p.label.replace("Instagram ", "IG ").replace("LinkedIn / ", "")}
             <span
-              className={`ml-1 font-mono ${active ? "opacity-70" : "opacity-50"}`}
+              className={`ml-1 font-mono text-[10px] ${active ? "text-ink-bg" : "text-ink-muted"}`}
             >
               {p.width}×{p.height}
             </span>
@@ -52,7 +48,7 @@ export function SizeRail() {
       })}
       <button
         type="button"
-        className="ml-1 rounded-sm border border-ink-border px-2 py-1 text-[10px] text-ink-muted hover:text-ink-text"
+        className="btn-secondary ml-1 min-h-[28px] px-2 text-[11px]"
         onClick={fit}
         title={`Zoom ${Math.round(viewport.zoom * 100)}%`}
       >

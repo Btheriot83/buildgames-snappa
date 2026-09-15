@@ -150,10 +150,10 @@ export function Toolbar() {
   };
 
   return (
-    <header className="flex h-12 shrink-0 items-center gap-2 border-b border-ink-border bg-ink-surface px-3">
-      <div className="mr-1 flex items-center gap-2 border-r border-ink-border pr-3">
+    <header className="flex h-12 shrink-0 items-center gap-2 border-b border-ink-border-strong bg-ink-surface px-3">
+      <div className="mr-1 flex items-center gap-2 border-r border-ink-border-strong pr-3">
         <span className="mark-word text-lg text-ink-lime">Forge Ink</span>
-        <span className="hidden text-[10px] uppercase tracking-[0.18em] text-ink-muted sm:inline">
+        <span className="ui-label hidden sm:inline">
           night press
         </span>
       </div>
@@ -165,7 +165,7 @@ export function Toolbar() {
             type="button"
             title={`${t.label} (${t.shortcut})`}
             data-active={tool === t.id}
-            className="tool-btn rounded-sm px-2.5 py-1.5 text-xs font-medium text-ink-muted hover:bg-ink-panel hover:text-ink-text"
+            className="tool-btn rounded-sm px-2.5 py-1.5 text-ink-muted hover:bg-ink-panel hover:text-ink-text"
             onClick={() => {
               if (t.id === "image") {
                 imgRef.current?.click();
@@ -183,7 +183,7 @@ export function Toolbar() {
 
       <button
         type="button"
-        className="rounded-sm px-2 py-1.5 text-xs text-ink-muted hover:bg-ink-panel hover:text-ink-text disabled:opacity-30"
+        className="btn-ghost disabled:opacity-30"
         disabled={history.length === 0}
         onClick={undo}
       >
@@ -191,7 +191,7 @@ export function Toolbar() {
       </button>
       <button
         type="button"
-        className="rounded-sm px-2 py-1.5 text-xs text-ink-muted hover:bg-ink-panel hover:text-ink-text disabled:opacity-30"
+        className="btn-ghost disabled:opacity-30"
         disabled={future.length === 0}
         onClick={redo}
       >
@@ -201,19 +201,19 @@ export function Toolbar() {
       <div className="mx-2 flex items-center gap-1">
         <button
           type="button"
-          className="rounded-sm px-2 py-1 text-xs text-ink-muted hover:bg-ink-panel"
+          className="btn-ghost px-2"
           onClick={() =>
             setViewport({ zoom: Math.max(0.15, viewport.zoom / 1.15) })
           }
         >
           −
         </button>
-        <span className="w-12 text-center font-mono text-[11px] text-ink-muted">
+        <span className="w-12 text-center font-mono text-xs text-ink-label">
           {Math.round(viewport.zoom * 100)}%
         </span>
         <button
           type="button"
-          className="rounded-sm px-2 py-1 text-xs text-ink-muted hover:bg-ink-panel"
+          className="btn-ghost px-2"
           onClick={() =>
             setViewport({ zoom: Math.min(3, viewport.zoom * 1.15) })
           }
@@ -224,11 +224,11 @@ export function Toolbar() {
 
       <div className="ml-auto flex items-center gap-2">
         <div
-          className="hidden items-center gap-2 px-1 font-mono text-[10px] text-ink-muted md:flex"
+          className="hidden items-center gap-2 px-1 font-mono text-[11px] text-ink-muted md:flex"
           title="Ink drops earned from templates & exports"
           data-testid="ink-drops"
         >
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink-muted" />
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink-label" />
           <InkDropCounter value={inkDrops} suffix="ink" />
           <span>·</span>
           <InkDropCounter value={exportsCount} suffix="exports" />
@@ -236,7 +236,7 @@ export function Toolbar() {
 
         <button
           type="button"
-          className="rounded-sm border border-ink-lime/40 bg-ink-panel px-2.5 py-1.5 text-xs font-medium text-ink-lime hover:bg-ink-lime hover:text-ink-bg"
+          className="btn-secondary text-ink-lime border-ink-lime-dim"
           onClick={() => setShowTemplates(true)}
           data-testid="open-templates"
         >
@@ -244,14 +244,14 @@ export function Toolbar() {
         </button>
         <button
           type="button"
-          className="hidden rounded-sm px-2 py-1.5 text-[11px] text-ink-muted/70 hover:bg-ink-panel hover:text-ink-muted sm:inline"
+          className="btn-ghost hidden sm:inline"
           onClick={() => projectRef.current?.click()}
         >
           Import
         </button>
         <button
           type="button"
-          className="hidden rounded-sm px-2 py-1.5 text-[11px] text-ink-muted/70 hover:bg-ink-panel hover:text-ink-muted sm:inline"
+          className="btn-ghost hidden sm:inline"
           onClick={handleExportJson}
         >
           .JSON
@@ -260,7 +260,7 @@ export function Toolbar() {
         <button
           type="button"
           data-testid="export-svg"
-          className="rounded-sm border border-ink-border-strong bg-ink-panel px-2.5 py-1.5 text-xs font-medium text-ink-text hover:border-ink-lime-dim"
+          className="btn-secondary"
           onClick={handleExportSvg}
         >
           SVG
@@ -268,7 +268,7 @@ export function Toolbar() {
         <button
           type="button"
           data-testid="export-pdf"
-          className="rounded-sm bg-ink-lime px-3 py-1.5 text-xs font-semibold text-ink-bg hover:bg-ink-lime-dim"
+          className="btn-primary"
           onClick={handleExportPdf}
         >
           Export PDF

@@ -73,16 +73,16 @@ export function ExportDock() {
       data-testid="export-dock"
     >
       <div className="mr-1 hidden sm:block">
-        <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted">
+        <p className="ui-label">
           Ready to pull
         </p>
-        <p className="text-xs text-ink-text">
+        <p className="text-sm font-medium text-ink-text">
           {doc.canvas.label} · {doc.canvas.width}×{doc.canvas.height}
         </p>
       </div>
       <button
         type="button"
-        className="rounded-sm border border-ink-border-strong bg-ink-panel px-3 py-2 text-xs font-medium text-ink-text hover:border-ink-lime-dim"
+        className="btn-secondary"
         onClick={() => void handleExportSvg()}
         data-testid="dock-export-svg"
       >
@@ -90,7 +90,7 @@ export function ExportDock() {
       </button>
       <button
         type="button"
-        className="rounded-sm bg-ink-lime px-4 py-2 text-xs font-semibold text-ink-bg hover:bg-ink-lime-dim"
+        className="btn-primary"
         onClick={() => void handleExportPdf()}
         data-testid="dock-export-pdf"
       >

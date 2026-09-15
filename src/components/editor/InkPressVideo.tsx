@@ -14,7 +14,7 @@ export function InkPressVideo() {
       className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center"
       data-testid="ink-press-video"
     >
-      <div className="relative max-h-[70%] max-w-[min(520px,70%)] overflow-hidden rounded-sm border border-ink-border press-ink-settle">
+      <div className="relative max-h-[70%] max-w-[min(520px,70%)] overflow-hidden rounded-sm border border-ink-border-strong press-ink-settle">
         <video
           className="press-video-matte block h-full w-full object-cover"
           autoPlay
@@ -25,16 +25,16 @@ export function InkPressVideo() {
         >
           <source src="/assets/press-loop.mp4" type="video/mp4" />
         </video>
-        <div className="absolute bottom-0 left-0 right-0 border-t border-ink-border bg-[#e7e1d4] px-4 py-3 text-center">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#1a1f1b]">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-[#0e1210] bg-[#e7e1d4] px-4 py-3.5 text-center">
+          <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-[#1a1f1b]">
             Blank sheet on the press
           </p>
-          <p className="mt-1 text-sm font-medium text-[#1a1f1b]">
+          <p className="mt-1 text-[15px] font-semibold text-[#0e1210]">
             Pick a size above, or open Templates → Export PDF
           </p>
           <button
             type="button"
-            className="pointer-events-auto mt-3 rounded-sm border border-[#0e1210] bg-[#0e1210] px-3 py-1.5 text-xs font-semibold text-[#a8e86a]"
+            className="pointer-events-auto btn-primary mt-3"
             onClick={() => setShowTemplates(true)}
           >
             Open templates

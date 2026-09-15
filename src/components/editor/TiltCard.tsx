@@ -61,7 +61,7 @@ export function TiltCard({
         type="button"
         ref={cardRef}
         data-testid={testId}
-        className={`t-tilt-card group flex h-full w-full flex-col overflow-hidden border border-ink-border bg-ink-panel text-left ${className}`}
+        className={`t-tilt-card group flex h-full w-full flex-col overflow-hidden border border-ink-border-strong bg-ink-panel text-left ${className}`}
         onClick={onClick}
       >
         {children}
