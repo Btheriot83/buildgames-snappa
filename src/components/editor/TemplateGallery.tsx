@@ -48,7 +48,7 @@ export function TemplateGallery() {
         style={{ ["--panel-translate-y" as string]: "24px" }}
       >
         {/* Job billboard — ≤3s: compose fixed-size → export */}
-        <div className="job-tape flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-ink-border-strong bg-ink-lime px-4 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-bg sm:px-6">
+        <div className="job-tape flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-ink-border-strong bg-ink-lime px-4 py-3 font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-bg sm:px-6">
           <span>Compose graphic</span>
           <span aria-hidden>→</span>
           <span>Fixed size</span>
