@@ -61,13 +61,13 @@ export function TemplateGallery() {
 
         <div className="flex items-end justify-between gap-4 border-b border-ink-border-strong px-5 py-4 sm:px-6 sm:py-5">
           <div>
-            <p className="ui-label text-ink-lime">
+            <p className="ui-label t-texts-reveal text-ink-lime" data-open={open ? "true" : "false"} data-delay="0">
               Night Press · start
             </p>
-            <h2 className="mark-word mt-1 text-4xl tracking-tight text-ink-text sm:text-5xl">
+            <h2 className="mark-word t-texts-reveal mt-1 text-4xl tracking-tight text-ink-text sm:text-5xl" data-open={open ? "true" : "false"} data-delay="1">
               Compose. Export.
             </h2>
-            <p className="ui-body mt-2 max-w-xl text-ink-muted">
+            <p className="ui-body t-texts-reveal mt-2 max-w-xl text-ink-muted" data-open={open ? "true" : "false"} data-delay="2">
               Pick a fixed social size, edit type on the sheet, download SVG or
               PDF. Nothing leaves this browser unless you export it.
             </p>

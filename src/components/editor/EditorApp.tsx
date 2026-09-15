@@ -117,7 +117,7 @@ export function EditorApp() {
           <main className="relative min-w-0 flex-1">
             {!hydrated && (
               <div
-                className="absolute inset-0 z-20 flex items-center justify-center bg-ink-bg/80"
+                className="t-skeleton absolute inset-0 z-20 flex items-center justify-center bg-ink-bg"
                 data-testid="loading-state"
               >
                 <p className="animate-pulse font-mono text-sm text-ink-label">
