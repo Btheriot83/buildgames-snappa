@@ -358,13 +358,13 @@ textarea:focus-visible {
 }
 
 .panel-head {
-  border-bottom: 1px solid var(--ink-border);
-  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--ink-border-strong);
+  padding: 0.65rem 0.75rem;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-size: 12px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-label);
+  color: var(--ink-lime);
   background: var(--ink-surface);
 }
 

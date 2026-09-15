@@ -18,7 +18,7 @@ export function LayersPanel() {
       </div>
       <ul className="flex-1 overflow-y-auto p-1" data-testid="layers-list">
         {layers.length === 0 && (
-          <li className="ui-caption px-2 py-6 text-center">
+          <li className="ui-caption px-3 py-8 text-center text-ink-muted">
             Empty stack — load a template or draw on the sheet.
           </li>
         )}
