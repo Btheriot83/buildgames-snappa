@@ -1,7 +1,7 @@
 /* transitions.dev recipes — free set, wired into product UX */
 :root {
   --check-blur-dur: 500ms;
-  --check-blur-from: 10px;
+  --check-blur-from: 0px;
   --check-bob-dur: 500ms;
   --check-ease-bob: cubic-bezier(0.34, 1.35, 0.64, 1);
   --check-ease-opacity: cubic-bezier(0.22, 1, 0.36, 1);
@@ -14,14 +14,14 @@
   --check-rotate-dur: 500ms;
   --check-rotate-from: 80deg;
   --check-y-amount: 40px;
-  --digit-blur: 2px;
+  --digit-blur: 0px;
   --digit-dir-x: 0;
   --digit-dir-y: 1;
   --digit-distance: 8px;
   --digit-dur: 500ms;
   --digit-ease: cubic-bezier(0.34, 1.45, 0.64, 1);
   --digit-stagger: 70ms;
-  --panel-blur: 2px;
+  --panel-blur: 0px;
   --panel-close-dur: 350ms;
   --panel-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --panel-open-dur: 400ms;
@@ -37,11 +37,11 @@
   --tilt-follow-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --tilt-glare-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --tilt-glare-fade: 300ms;
-  --tilt-glare-opacity: 0.32;
+  --tilt-glare-opacity: 0;
   --tilt-perspective: 1000px;
   --tilt-return: 1000ms;
   --tilt-return-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --toast-blur: 2px;
+  --toast-blur: 0px;
   --toast-close: 250ms;
   --toast-distance: 16px;
   --toast-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -76,19 +76,7 @@
 /* Cursor-tracked glare: layered soft circles that add like
    light (screen blend) at the pointer position. */
 .t-tilt-glare {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  mix-blend-mode: screen;
-  background:
-    radial-gradient(circle 95px at var(--tilt-gx, 50%) var(--tilt-gy, 50%),
-      rgba(255,255,255,0.48), rgba(255,255,255,0.06) 52%, rgba(255,255,255,0) 84%),
-    radial-gradient(circle 200px at var(--tilt-gx, 50%) var(--tilt-gy, 50%),
-      rgba(255,255,255,0.22), rgba(255,255,255,0.04) 58%, rgba(255,255,255,0) 78%),
-    radial-gradient(circle 360px at var(--tilt-gx, 50%) var(--tilt-gy, 50%),
-      rgba(255,255,255,0.10), rgba(255,255,255,0) 88%);
-  transition: opacity var(--tilt-glare-fade) var(--tilt-glare-ease);
+  display: none; /* Brandon bar: no glass glare / radial glow */
 }
 .t-tilt.is-hover .t-tilt-glare { opacity: var(--tilt-glare-opacity); }
 

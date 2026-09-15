@@ -138,19 +138,16 @@ body {
   color: var(--ink-bg);
 }
 
-/* Warm paper well — kills perma-dark grey body tell */
+/* Warm paper well — flat material (no decorative gradients) */
 .canvas-well {
-  background:
-    linear-gradient(180deg, #d9d2c3 0%, var(--ink-paper) 40%, #ddd6c8 100%);
   background-color: var(--ink-paper);
 }
 
 .canvas-stage {
   transition: transform 0.15s ease-out;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.35) inset,
-    0 18px 40px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(0, 0, 0, 0.2);
+    8px 10px 0 rgba(14, 18, 16, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
 }
 
 .mark-word {
@@ -172,17 +169,12 @@ textarea:focus-visible {
 
 /* Tech 5 — pressman motion craft (not transitions.dev catalog) */
 @keyframes press-ink-settle {
-  0% { opacity: 0; filter: blur(6px); transform: scale(1.04) translateY(6px); }
-  55% { opacity: 1; filter: blur(0); transform: scale(1.01) translateY(0); }
-  100% { opacity: 1; filter: blur(0); transform: scale(1) translateY(0); }
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes press-registration {
   0%, 100% { opacity: 0.35; }
   50% { opacity: 0.9; }
-}
-@keyframes press-lamp-breathe {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 0.85; }
 }
 .press-ink-settle {
   animation: press-ink-settle 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -190,10 +182,17 @@ textarea:focus-visible {
 .press-reg-mark {
   animation: press-registration 2.8s ease-in-out infinite;
 }
-.press-lamp {
-  animation: press-lamp-breathe 4.5s ease-in-out infinite;
-}
 .press-video-matte {
   mix-blend-mode: multiply;
   opacity: 0.92;
+}
+
+/* Phase B2 — job clarity (flat chrome; no glass/glow/gradients) */
+.job-tape {
+  letter-spacing: 0.16em;
+}
+.export-dock {
+  background: var(--ink-surface);
+  border: 1px solid var(--ink-border-strong);
+  box-shadow: 4px 4px 0 rgba(14, 18, 16, 0.5);
 }

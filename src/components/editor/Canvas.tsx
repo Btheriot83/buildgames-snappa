@@ -112,7 +112,7 @@ export function Canvas() {
           name: "Text",
           width: 320,
           height: 80,
-          text: "New text",
+          text: "Your headline",
           fontFamily: "Archivo Black",
           fontSize: 48,
           fontWeight: 700,
@@ -268,9 +268,6 @@ export function Canvas() {
             : tool === "select"
               ? "default"
               : "crosshair",
-        backgroundImage:
-          "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0)",
-        backgroundSize: "20px 20px",
       }}
       onWheel={onWheel}
       onPointerDown={onPointerDown}
@@ -279,7 +276,7 @@ export function Canvas() {
       data-testid="canvas-stage"
     >
       <div
-        className="canvas-stage absolute origin-top-left shadow-2xl"
+        className="canvas-stage absolute origin-top-left"
         style={{
           transform: `translate(${viewport.panX}px, ${viewport.panY}px) scale(${viewport.zoom})`,
           width: doc.canvas.width,
@@ -423,13 +420,13 @@ function ElementNode({
           ].map(([hx, hy], i) => (
             <rect
               key={i}
-              x={hx - 5}
-              y={hy - 5}
-              width={10}
-              height={10}
+              x={hx - 6}
+              y={hy - 6}
+              width={12}
+              height={12}
               fill="#A8E86A"
               stroke="#0e1210"
-              strokeWidth={1}
+              strokeWidth={2}
             />
           ))}
         </g>

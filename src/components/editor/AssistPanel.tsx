@@ -5,6 +5,12 @@ import { useEditorStore } from "@/store/editorStore";
 import type { AssistSuggestion } from "@/lib/ai/assist";
 import type { TextElement } from "@/lib/types";
 
+const BRIEF_EXAMPLES = [
+  "Mesa diesel bay open — same-day mobile repair, Apache Blvd",
+  "Roosevelt Row night market Sat 7PM — free entry flyer",
+  "$89 on-site diagnostic this week — Tempe / Mesa fleet vans",
+];
+
 export function AssistPanel() {
   const doc = useEditorStore((s) => s.document);
   const applyAssistText = useEditorStore((s) => s.applyAssistText);
@@ -75,6 +81,8 @@ export function AssistPanel() {
           Pressman assist
         </p>
         <span className="font-mono text-[9px] text-ink-muted">
+          {doc.canvas.width}×{doc.canvas.height}
+          {" · "}
           {configured === null
             ? "…"
             : configured
@@ -84,16 +92,28 @@ export function AssistPanel() {
       </div>
       <p className="text-[11px] leading-snug text-ink-muted">
         {configured
-          ? "Real layout/copy for this canvas size. No canned filler."
-          : "Add BUILD_GAMES_LLM_API_KEY on the server to unlock pressman proofs."}
+          ? "Real layout/copy sized to this canvas. No canned filler."
+          : "Add BUILD_GAMES_LLM_API_KEY (OpenRouter) on the server to unlock proofs."}
       </p>
       <textarea
         className="min-h-[64px] w-full resize-y rounded-sm border border-ink-border bg-ink-bg px-2 py-1.5 text-xs text-ink-text"
-        placeholder="e.g. Launch poster for a night-market coffee cart — bold, local, no hype"
+        placeholder={BRIEF_EXAMPLES[0]}
         value={brief}
         onChange={(e) => setBrief(e.target.value)}
         data-testid="assist-brief"
       />
+      <div className="flex flex-wrap gap-1">
+        {BRIEF_EXAMPLES.map((ex) => (
+          <button
+            key={ex}
+            type="button"
+            className="rounded-sm border border-ink-border px-1.5 py-0.5 text-[9px] text-ink-muted hover:border-ink-amber hover:text-ink-amber"
+            onClick={() => setBrief(ex)}
+          >
+            {ex.split("—")[0].trim().slice(0, 28)}…
+          </button>
+        ))}
+      </div>
       <button
         type="button"
         disabled={busy}
@@ -155,8 +175,10 @@ export function AssistPanel() {
               type="button"
               className="w-full rounded-sm border border-ink-lime-dim px-2 py-1.5 text-xs text-ink-lime"
               onClick={() => {
-                if (result.headlines[0]) applyAssistText("headline", result.headlines[0]);
-                if (result.subheads[0]) applyAssistText("subhead", result.subheads[0]);
+                if (result.headlines[0])
+                  applyAssistText("headline", result.headlines[0]);
+                if (result.subheads[0])
+                  applyAssistText("subhead", result.subheads[0]);
                 if (result.ctas[0]) applyAssistText("cta", result.ctas[0]);
               }}
               data-testid="assist-apply-top"

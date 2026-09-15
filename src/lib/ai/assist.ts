@@ -1,8 +1,7 @@
 /**
  * AI layout/copy assist for fixed-size social canvases.
- * Reads BUILD_GAMES_LLM_API_KEY first (see /workspace/build-games/gauntlet/LLM.md).
- * Prefer xAI when key starts with xai-; else OpenAI-compatible.
- * Also accepts XAI_API_KEY / GROK_API_KEY / OPENAI_API_KEY.
+ * BUILD_GAMES_LLM_API_KEY is an OpenRouter key (see /workspace/build-games/gauntlet/LLM.md).
+ * Also accepts OPENROUTER_API_KEY / XAI_API_KEY / GROK_API_KEY / OPENAI_API_KEY.
  * No canned fake AI — missing/invalid key → honest error.
  */
 
@@ -34,10 +33,41 @@ type Provider = {
   base: string;
   model: string;
   name: string;
+  extraHeaders?: Record<string, string>;
 };
 
 function resolveProvider(): Provider | null {
   const shared = process.env.BUILD_GAMES_LLM_API_KEY?.trim();
+  const openrouter =
+    process.env.OPENROUTER_API_KEY?.trim() ||
+    (shared && !shared.startsWith("xai-") && !shared.startsWith("sk-")
+      ? shared
+      : undefined) ||
+    (shared && process.env.LLM_BASE_URL?.includes("openrouter")
+      ? shared
+      : undefined);
+
+  // Prefer explicit OpenRouter base or shared Build Games key → OpenRouter
+  const llmBase = process.env.LLM_BASE_URL?.replace(/\/$/, "");
+  if (shared && (llmBase?.includes("openrouter") || !process.env.OPENAI_API_KEY)) {
+    // Default Build Games path: OpenRouter (LLM.md)
+    if (!shared.startsWith("xai-")) {
+      return {
+        key: shared,
+        base: llmBase || "https://openrouter.ai/api/v1",
+        model:
+          process.env.OPENROUTER_MODEL?.trim() ||
+          process.env.OPENAI_MODEL?.trim() ||
+          "openai/gpt-4o-mini",
+        name: "openrouter",
+        extraHeaders: {
+          "HTTP-Referer": "https://buildgames-snappa.vercel.app",
+          "X-Title": "Build Games — Forge Ink",
+        },
+      };
+    }
+  }
+
   const xai =
     process.env.XAI_API_KEY?.trim() ||
     process.env.GROK_API_KEY?.trim() ||
@@ -50,9 +80,21 @@ function resolveProvider(): Provider | null {
       name: "xai",
     };
   }
-  const openai =
-    process.env.OPENAI_API_KEY?.trim() ||
-    (shared && !shared.startsWith("xai-") ? shared : undefined);
+
+  if (openrouter) {
+    return {
+      key: openrouter,
+      base: "https://openrouter.ai/api/v1",
+      model: process.env.OPENROUTER_MODEL?.trim() || "openai/gpt-4o-mini",
+      name: "openrouter",
+      extraHeaders: {
+        "HTTP-Referer": "https://buildgames-snappa.vercel.app",
+        "X-Title": "Build Games — Forge Ink",
+      },
+    };
+  }
+
+  const openai = process.env.OPENAI_API_KEY?.trim();
   if (openai) {
     return {
       key: openai,
@@ -61,16 +103,20 @@ function resolveProvider(): Provider | null {
         ""
       ),
       model: process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini",
-      name: shared && !process.env.OPENAI_API_KEY ? "build-games-llm" : "openai",
+      name: "openai",
     };
   }
+
   if (shared) {
-    // Last resort: try shared against xAI even if prefix unknown (LLM.md)
     return {
       key: shared,
-      base: "https://api.x.ai/v1",
-      model: process.env.XAI_MODEL?.trim() || "grok-3-mini",
-      name: "xai-fallback",
+      base: "https://openrouter.ai/api/v1",
+      model: "openai/gpt-4o-mini",
+      name: "openrouter-fallback",
+      extraHeaders: {
+        "HTTP-Referer": "https://buildgames-snappa.vercel.app",
+        "X-Title": "Build Games — Forge Ink",
+      },
     };
   }
   return null;
@@ -84,7 +130,7 @@ export async function runAssist(req: AssistRequest): Promise<AssistSuggestion> {
   const provider = resolveProvider();
   if (!provider) {
     const err = new Error(
-      "No AI key configured. Set BUILD_GAMES_LLM_API_KEY (or XAI_API_KEY / OPENAI_API_KEY)."
+      "No AI key configured. Set BUILD_GAMES_LLM_API_KEY (OpenRouter) or XAI_API_KEY / OPENAI_API_KEY."
     );
     (err as Error & { status: number }).status = 503;
     throw err;
@@ -101,6 +147,7 @@ Return ONLY valid JSON:
 }
 Copy must fit ${req.canvas.width}×${req.canvas.height} (${req.canvas.label}).
 Short punchy lines. No markdown. No vibe-purple clichés. No fake stats.
+Prefer concrete places, hours, and shop names when the brief allows (Phoenix / Mesa / diesel / night market OK).
 layoutNotes must be spatial (margins, hierarchy, contrast on the artboard).`;
 
   const user = JSON.stringify({
@@ -115,6 +162,7 @@ layoutNotes must be spatial (margins, hierarchy, contrast on the artboard).`;
     headers: {
       Authorization: `Bearer ${provider.key}`,
       "Content-Type": "application/json",
+      ...(provider.extraHeaders ?? {}),
     },
     body: JSON.stringify({
       model: provider.model,

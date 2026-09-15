@@ -296,7 +296,7 @@ export const useEditorStore = create<EditorState>()(
         s.dirty = true;
         s.showTemplates = false;
         s.status = "success";
-        s.statusMessage = `Loaded “${starter.name}”`;
+        s.statusMessage = `Loaded “${starter.name}” — edit type, then Export PDF`;
         s.inkDrops += 1;
         // Fit canvas in typical workstation viewport
         const fit = Math.min(

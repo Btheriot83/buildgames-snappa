@@ -1,0 +1,46 @@
+{
+  "slug": "snappa",
+  "product": "Forge Ink",
+  "aesthetic": "Night Press",
+  "identityFrozen": true,
+  "reseeded": false,
+  "demoUrl": "https://buildgames-snappa.vercel.app",
+  "bar": "https://snappa.com/",
+  "repo": "https://github.com/Btheriot83/buildgames-snappa",
+  "branch": "feat/gauntlet-r2",
+  "phaseA": {
+    "done": true,
+    "techniquesDone": [1, 2, 3, 4, 5, 6, 7, 8],
+    "identityPath": "docs/IDENTITY.md"
+  },
+  "phaseB": {
+    "roundsCompleted": 5,
+    "roundsTarget": 5,
+    "workbench": "apps/snappa/gauntlet/workbench.md"
+  },
+  "phaseB2": {
+    "roundsCompleted": 10,
+    "roundsTarget": 10,
+    "workbench": "apps/snappa/gauntlet/workbench-r2.md",
+    "visibleDelta": "apps/snappa/gauntlet/VISIBLE_DELTA.md",
+    "focus": [
+      "job clarity compose→export",
+      "real AZ shop templates",
+      "visible mistake fixes",
+      "flat chrome anti-slop (no gradients/glass/glow)"
+    ],
+    "antiSlop": {
+      "gradientsStripped": true,
+      "glassBlurKilled": true,
+      "glowKilled": true
+    }
+  },
+  "status": "gauntlet_r2_complete",
+  "readyForWalkthroughVideo": true,
+  "doNotMessageBrandon": true,
+  "updatedAtPt": "2026-09-14 9:22 PM PT",
+  "finishedAtPt": "2026-09-14 9:22 PM PT",
+  "finishedAtUtc": "2026-09-15T04:22:47Z",
+  "path": "/workspace/build-games/apps/snappa",
+  "notes": "Phase B2 ten rounds under locked Night Press. Job ≤3s: compose fixed-size → Export PDF. Real Mesa/Roosevelt/AZMDR templates. OpenRouter assist fix. Brandon bar: stripped decorative gradients, glass blur, glow from chrome."
+}

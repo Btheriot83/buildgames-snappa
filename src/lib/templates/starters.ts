@@ -19,15 +19,10 @@ export function inkWashDataUrl(
   ink = "#9FE870",
   paper = "#1a211c"
 ): string {
+  // Flat plate only — no radial/mesh gradients (Brandon bar)
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-  <defs>
-    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.1  0 0 0 0 0.15  0 0 0 0 0.1  0 0 0 0.35 0"/></filter>
-    <radialGradient id="g" cx="30%" cy="20%" r="80%"><stop offset="0%" stop-color="${ink}" stop-opacity="0.55"/><stop offset="55%" stop-color="${paper}" stop-opacity="0"/><stop offset="100%" stop-color="#0c0f0d" stop-opacity="0.9"/></radialGradient>
-  </defs>
   <rect width="100%" height="100%" fill="${paper}"/>
-  <rect width="100%" height="100%" fill="url(#g)"/>
-  <rect width="100%" height="100%" filter="url(#n)" opacity="0.45"/>
-  <circle cx="${w * 0.78}" cy="${h * 0.72}" r="${Math.min(w, h) * 0.22}" fill="${ink}" opacity="0.18"/>
+  <rect x="0" y="${Math.floor(h * 0.72)}" width="100%" height="${Math.floor(h * 0.28)}" fill="${ink}" opacity="0.22"/>
 </svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
@@ -71,22 +66,31 @@ export type StarterId =
   | "quote-card"
   | "story-countdown"
   | "event-flyer"
-  | "product-drop";
+  | "product-drop"
+  | "shop-hours"
+  | "story-offer";
 
 export interface StarterTemplate {
   id: StarterId;
   name: string;
   blurb: string;
   category: string;
+  /** Preview overlay for gallery cards — real copy, not SAMPLE */
+  previewHeadline: string;
+  previewSub?: string;
+  sizeLabel: string;
   build: () => ProjectDocument;
 }
 
 export const STARTER_TEMPLATES: StarterTemplate[] = [
   {
     id: "launch-poster",
-    name: "Launch Poster",
-    blurb: "Bold product drop on charcoal with lime strike.",
+    name: "Shop Open Poster",
+    blurb: "Mesa diesel bay — charcoal sheet, lime strike, export-ready.",
     category: "Social",
+    previewHeadline: "MESA BAY OPEN",
+    previewSub: "Same-day · Apache Blvd",
+    sizeLabel: "1080×1080",
     build: () => {
       const wash = "/assets/texture-square.jpg";
       const imgId = createId("el");
@@ -116,7 +120,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           type: "rect",
           name: "Strike bar",
           x: 72,
-          y: 720,
+          y: 700,
           width: 220,
           height: 14,
           rotation: 0,
@@ -134,17 +138,17 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           type: "text",
           name: "Headline",
           x: 72,
-          y: 760,
-          width: 900,
+          y: 740,
+          width: 920,
           height: 140,
           rotation: 0,
           opacity: 1,
           locked: false,
           visible: true,
           parentId: null,
-          text: "SHIP LOUD.",
+          text: "MESA BAY OPEN",
           fontFamily: "Archivo Black",
-          fontSize: 96,
+          fontSize: 84,
           fontWeight: 400,
           fill: "#F4F7F2",
           align: "left",
@@ -156,22 +160,22 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           type: "text",
           name: "Subhead",
           x: 72,
-          y: 920,
-          width: 700,
+          y: 900,
+          width: 780,
           height: 60,
           rotation: 0,
           opacity: 1,
           locked: false,
           visible: true,
           parentId: null,
-          text: "Forge Ink · week one drop",
+          text: "AZ Mobile Diesel · Apache Blvd · same-day",
           fontFamily: "IBM Plex Mono",
-          fontSize: 28,
+          fontSize: 26,
           fontWeight: 500,
           fill: "#E8A54B",
           align: "left",
           lineHeight: 1.2,
-          letterSpacing: 1,
+          letterSpacing: 0.5,
         },
         {
           id: tagId,
@@ -179,14 +183,14 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           name: "Corner mark",
           x: 72,
           y: 64,
-          width: 400,
+          width: 480,
           height: 40,
           rotation: 0,
           opacity: 1,
           locked: false,
           visible: true,
           parentId: null,
-          text: "FORGE / 01",
+          text: "FORGE / MESA 09",
           fontFamily: "IBM Plex Mono",
           fontSize: 22,
           fontWeight: 500,
@@ -196,14 +200,17 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           letterSpacing: 4,
         },
       ];
-      return igSquare("Launch Poster", elements, "#141a15");
+      return igSquare("Mesa Bay Open — IG", elements, "#141a15");
     },
   },
   {
     id: "quote-card",
-    name: "Quote Card",
-    blurb: "Editorial pull-quote with amber rule.",
+    name: "Bay Quote",
+    blurb: "Pull-quote for the shop wall — amber rule, editorial type.",
     category: "Social",
+    previewHeadline: "“Fix it once.",
+    previewSub: "— R. Castillo, Mesa",
+    sizeLabel: "1080×1080",
     build: () => {
       const ruleId = createId("el");
       const quoteId = createId("el");
@@ -259,9 +266,9 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           locked: false,
           visible: true,
           parentId: null,
-          text: "“Clarity is a design decision, not a feature.”",
+          text: "“Fix it once on the lot — not twice in the shop.”",
           fontFamily: "Playfair Display",
-          fontSize: 64,
+          fontSize: 58,
           fontWeight: 700,
           fill: "#F4F7F2",
           align: "left",
@@ -274,14 +281,14 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           name: "Attribution",
           x: 120,
           y: 820,
-          width: 600,
+          width: 700,
           height: 48,
           rotation: 0,
           opacity: 1,
           locked: false,
           visible: true,
           parentId: null,
-          text: "— Studio notes",
+          text: "— R. Castillo · Mesa diesel tech",
           fontFamily: "IBM Plex Sans",
           fontSize: 28,
           fontWeight: 500,
@@ -291,20 +298,24 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           letterSpacing: 0,
         },
       ];
-      return igSquare("Quote Card", elements, "#0f1310");
+      return igSquare("Bay Quote — IG", elements, "#0f1310");
     },
   },
   {
     id: "story-countdown",
-    name: "Story Countdown",
-    blurb: "Vertical hype story with big number.",
+    name: "Market Countdown",
+    blurb: "Vertical story — big number, Roosevelt Row night market.",
     category: "Story",
+    previewHeadline: "03",
+    previewSub: "DAYS · ROOSEVELT ROW",
+    sizeLabel: "1080×1920",
     build: () => {
       const now = new Date().toISOString();
       const circleId = createId("el");
       const numId = createId("el");
       const labelId = createId("el");
       const ctaId = createId("el");
+      const placeId = createId("el");
       const elements: CanvasElement[] = [
         {
           id: circleId,
@@ -358,14 +369,36 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           locked: false,
           visible: true,
           parentId: null,
-          text: "DAYS TO OPEN STUDIO",
+          text: "DAYS TO NIGHT MARKET",
           fontFamily: "IBM Plex Mono",
-          fontSize: 32,
+          fontSize: 30,
           fontWeight: 600,
           fill: "#9FE870",
           align: "center",
           lineHeight: 1.2,
-          letterSpacing: 6,
+          letterSpacing: 5,
+        },
+        {
+          id: placeId,
+          type: "text",
+          name: "Place",
+          x: 80,
+          y: 1040,
+          width: 920,
+          height: 48,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "Roosevelt Row · Sat 7PM · free entry",
+          fontFamily: "IBM Plex Sans",
+          fontSize: 26,
+          fontWeight: 500,
+          fill: "#b8c0b6",
+          align: "center",
+          lineHeight: 1.2,
+          letterSpacing: 0,
         },
         {
           id: ctaId,
@@ -391,7 +424,13 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
         },
       ];
       return {
-        meta: { id: createId("proj"), name: "Story Countdown", createdAt: now, updatedAt: now, version: 1 },
+        meta: {
+          id: createId("proj"),
+          name: "Roosevelt Night Market — Story",
+          createdAt: now,
+          updatedAt: now,
+          version: 1,
+        },
         canvas: { width: 1080, height: 1920, label: "Instagram Story" },
         elements,
         layerOrder: elements.map((e) => e.id),
@@ -401,11 +440,15 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
   },
   {
     id: "event-flyer",
-    name: "Event Flyer",
-    blurb: "Night market flyer with stamp circle.",
+    name: "Night Market Flyer",
+    blurb: "PHX night market — lime band, amber stamp, print-ish square.",
     category: "Print-ish",
+    previewHeadline: "NIGHT\nMARKET",
+    previewSub: "SAT 21 · ROOSEVELT",
+    sizeLabel: "1080×1080",
     build: () => {
       const stampId = createId("el");
+      const stampTextId = createId("el");
       const titleId = createId("el");
       const whenId = createId("el");
       const whereId = createId("el");
@@ -445,6 +488,28 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           fill: "transparent",
           stroke: "#E8A54B",
           strokeWidth: 8,
+        },
+        {
+          id: stampTextId,
+          type: "text",
+          name: "Stamp text",
+          x: 740,
+          y: 175,
+          width: 220,
+          height: 80,
+          rotation: -12,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "PHX\nFREE",
+          fontFamily: "Archivo Black",
+          fontSize: 36,
+          fontWeight: 400,
+          fill: "#E8A54B",
+          align: "center",
+          lineHeight: 1.05,
+          letterSpacing: 2,
         },
         {
           id: titleId,
@@ -503,7 +568,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           locked: false,
           visible: true,
           parentId: null,
-          text: "River Lot · free entry",
+          text: "Roosevelt Row · free entry",
           fontFamily: "IBM Plex Sans",
           fontSize: 28,
           fontWeight: 600,
@@ -513,14 +578,17 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           letterSpacing: 0,
         },
       ];
-      return igSquare("Event Flyer", elements, "#161c18");
+      return igSquare("PHX Night Market Flyer", elements, "#161c18");
     },
   },
   {
     id: "product-drop",
-    name: "Product Drop",
-    blurb: "OG / LinkedIn wide promo strip.",
+    name: "Hours Drop",
+    blurb: "LinkedIn / OG wide — new shop hours, book on the lot.",
     category: "Wide",
+    previewHeadline: "New hours. Same bay.",
+    previewSub: "Mon–Sat 7–6 · Mesa",
+    sizeLabel: "1200×627",
     build: () => {
       const now = new Date().toISOString();
       const wash = "/assets/texture-wide.jpg";
@@ -528,6 +596,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
       const titleId = createId("el");
       const subId = createId("el");
       const chipId = createId("el");
+      const chipTextId = createId("el");
       const elements: CanvasElement[] = [
         {
           id: imgId,
@@ -551,7 +620,7 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           name: "Chip",
           x: 64,
           y: 72,
-          width: 160,
+          width: 180,
           height: 40,
           rotation: 0,
           opacity: 1,
@@ -564,19 +633,41 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           cornerRadius: 2,
         },
         {
+          id: chipTextId,
+          type: "text",
+          name: "Chip label",
+          x: 76,
+          y: 78,
+          width: 160,
+          height: 32,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "HOURS 09",
+          fontFamily: "IBM Plex Mono",
+          fontSize: 18,
+          fontWeight: 700,
+          fill: "#0c0f0d",
+          align: "left",
+          lineHeight: 1.2,
+          letterSpacing: 2,
+        },
+        {
           id: titleId,
           type: "text",
           name: "Title",
           x: 64,
           y: 220,
-          width: 900,
+          width: 980,
           height: 120,
           rotation: 0,
           opacity: 1,
           locked: false,
           visible: true,
           parentId: null,
-          text: "New ink. Same grit.",
+          text: "New hours. Same bay.",
           fontFamily: "Archivo Black",
           fontSize: 64,
           fontWeight: 700,
@@ -591,16 +682,16 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           name: "Sub",
           x: 64,
           y: 360,
-          width: 700,
-          height: 60,
+          width: 900,
+          height: 80,
           rotation: 0,
           opacity: 1,
           locked: false,
           visible: true,
           parentId: null,
-          text: "Local-first graphics. Export SVG & PDF.",
+          text: "AZ Mobile Diesel · Mon–Sat 7AM–6PM · book on the lot",
           fontFamily: "IBM Plex Sans",
-          fontSize: 28,
+          fontSize: 26,
           fontWeight: 400,
           fill: "#b8c0b6",
           align: "left",
@@ -608,36 +699,300 @@ export const STARTER_TEMPLATES: StarterTemplate[] = [
           letterSpacing: 0,
         },
       ];
-      // chip label as text on top
-      const chipTextId = createId("el");
-      elements.push({
-        id: chipTextId,
-        type: "text",
-        name: "Chip label",
-        x: 76,
-        y: 78,
-        width: 140,
-        height: 32,
-        rotation: 0,
-        opacity: 1,
-        locked: false,
-        visible: true,
-        parentId: null,
-        text: "DROP 04",
-        fontFamily: "IBM Plex Mono",
-        fontSize: 18,
-        fontWeight: 700,
-        fill: "#0c0f0d",
-        align: "left",
-        lineHeight: 1.2,
-        letterSpacing: 2,
-      });
       return {
-        meta: { id: createId("proj"), name: "Product Drop", createdAt: now, updatedAt: now, version: 1 },
+        meta: {
+          id: createId("proj"),
+          name: "AZMDR Hours — LinkedIn",
+          createdAt: now,
+          updatedAt: now,
+          version: 1,
+        },
         canvas: { width: 1200, height: 627, label: "LinkedIn / OG" },
         elements,
         layerOrder: elements.map((e) => e.id),
         background: "#121812",
+      };
+    },
+  },
+  {
+    id: "shop-hours",
+    name: "Bay Hours Card",
+    blurb: "Square hours card — Mon–Sat grid, Mesa address, export PDF.",
+    category: "Social",
+    previewHeadline: "BAY HOURS",
+    previewSub: "2140 E Apache · Mesa",
+    sizeLabel: "1080×1080",
+    build: () => {
+      const titleId = createId("el");
+      const hoursId = createId("el");
+      const addrId = createId("el");
+      const ruleId = createId("el");
+      const tagId = createId("el");
+      const bandId = createId("el");
+      const elements: CanvasElement[] = [
+        {
+          id: bandId,
+          type: "rect",
+          name: "Side band",
+          x: 0,
+          y: 0,
+          width: 28,
+          height: 1080,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          fill: "#9FE870",
+          stroke: "transparent",
+          strokeWidth: 0,
+          cornerRadius: 0,
+        },
+        {
+          id: tagId,
+          type: "text",
+          name: "Tag",
+          x: 80,
+          y: 80,
+          width: 400,
+          height: 36,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "AZ MOBILE DIESEL",
+          fontFamily: "IBM Plex Mono",
+          fontSize: 20,
+          fontWeight: 600,
+          fill: "#9FE870",
+          align: "left",
+          lineHeight: 1.2,
+          letterSpacing: 3,
+        },
+        {
+          id: titleId,
+          type: "text",
+          name: "Headline",
+          x: 80,
+          y: 160,
+          width: 880,
+          height: 100,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "BAY HOURS",
+          fontFamily: "Archivo Black",
+          fontSize: 88,
+          fontWeight: 400,
+          fill: "#F4F7F2",
+          align: "left",
+          lineHeight: 1.05,
+          letterSpacing: -2,
+        },
+        {
+          id: ruleId,
+          type: "rect",
+          name: "Rule",
+          x: 80,
+          y: 280,
+          width: 160,
+          height: 8,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          fill: "#E8A54B",
+          stroke: "transparent",
+          strokeWidth: 0,
+          cornerRadius: 0,
+        },
+        {
+          id: hoursId,
+          type: "text",
+          name: "Hours",
+          x: 80,
+          y: 340,
+          width: 880,
+          height: 420,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "Mon–Fri   7:00 AM – 6:00 PM\nSaturday  7:00 AM – 2:00 PM\nSunday    Closed · on-call",
+          fontFamily: "IBM Plex Mono",
+          fontSize: 36,
+          fontWeight: 500,
+          fill: "#eceee9",
+          align: "left",
+          lineHeight: 1.55,
+          letterSpacing: 0,
+        },
+        {
+          id: addrId,
+          type: "text",
+          name: "Address",
+          x: 80,
+          y: 900,
+          width: 880,
+          height: 80,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "2140 E Apache Blvd · Mesa AZ 85204\nCall ahead · mobile service valley-wide",
+          fontFamily: "IBM Plex Sans",
+          fontSize: 26,
+          fontWeight: 500,
+          fill: "#8b958d",
+          align: "left",
+          lineHeight: 1.35,
+          letterSpacing: 0,
+        },
+      ];
+      return igSquare("Bay Hours — Mesa", elements, "#121812");
+    },
+  },
+  {
+    id: "story-offer",
+    name: "Lot Special Story",
+    blurb: "IG Story offer — diagnostic special, Tempe / Mesa fleet.",
+    category: "Story",
+    previewHeadline: "$89",
+    previewSub: "DIAGNOSTIC · THIS WEEK",
+    sizeLabel: "1080×1920",
+    build: () => {
+      const now = new Date().toISOString();
+      const priceId = createId("el");
+      const labelId = createId("el");
+      const detailId = createId("el");
+      const topId = createId("el");
+      const barId = createId("el");
+      const elements: CanvasElement[] = [
+        {
+          id: topId,
+          type: "text",
+          name: "Top mark",
+          x: 80,
+          y: 180,
+          width: 920,
+          height: 60,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "THIS WEEK ONLY",
+          fontFamily: "IBM Plex Mono",
+          fontSize: 28,
+          fontWeight: 600,
+          fill: "#E8A54B",
+          align: "center",
+          lineHeight: 1.2,
+          letterSpacing: 6,
+        },
+        {
+          id: priceId,
+          type: "text",
+          name: "Headline",
+          x: 80,
+          y: 620,
+          width: 920,
+          height: 280,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "$89",
+          fontFamily: "Archivo Black",
+          fontSize: 220,
+          fontWeight: 400,
+          fill: "#F4F7F2",
+          align: "center",
+          lineHeight: 0.9,
+          letterSpacing: -6,
+        },
+        {
+          id: labelId,
+          type: "text",
+          name: "Label",
+          x: 80,
+          y: 920,
+          width: 920,
+          height: 80,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "ON-SITE DIAGNOSTIC",
+          fontFamily: "Archivo Black",
+          fontSize: 42,
+          fontWeight: 400,
+          fill: "#9FE870",
+          align: "center",
+          lineHeight: 1.1,
+          letterSpacing: 2,
+        },
+        {
+          id: barId,
+          type: "rect",
+          name: "Bar",
+          x: 390,
+          y: 1020,
+          width: 300,
+          height: 10,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          fill: "#E8A54B",
+          stroke: "transparent",
+          strokeWidth: 0,
+          cornerRadius: 0,
+        },
+        {
+          id: detailId,
+          type: "text",
+          name: "Detail",
+          x: 100,
+          y: 1080,
+          width: 880,
+          height: 160,
+          rotation: 0,
+          opacity: 1,
+          locked: false,
+          visible: true,
+          parentId: null,
+          text: "Fleet vans · box trucks · light diesel\nTempe · Mesa · Chandler\nText the bay to book",
+          fontFamily: "IBM Plex Sans",
+          fontSize: 32,
+          fontWeight: 500,
+          fill: "#b8c0b6",
+          align: "center",
+          lineHeight: 1.4,
+          letterSpacing: 0,
+        },
+      ];
+      return {
+        meta: {
+          id: createId("proj"),
+          name: "Diagnostic Special — Story",
+          createdAt: now,
+          updatedAt: now,
+          version: 1,
+        },
+        canvas: { width: 1080, height: 1920, label: "Instagram Story" },
+        elements,
+        layerOrder: elements.map((e) => e.id),
+        background: "#0e1210",
       };
     },
   },
