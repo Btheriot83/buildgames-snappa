@@ -404,17 +404,35 @@ function ElementNode({
     <g transform={transform}>
       {node}
       {selected && (
-        <rect
-          x={el.x}
-          y={el.y}
-          width={el.width}
-          height={el.height}
-          fill="none"
-          stroke="#A8E86A"
-          strokeWidth={2}
-          strokeDasharray="6 4"
-          pointerEvents="none"
-        />
+        <g pointerEvents="none">
+          <rect
+            x={el.x}
+            y={el.y}
+            width={el.width}
+            height={el.height}
+            fill="none"
+            stroke="#A8E86A"
+            strokeWidth={2 / 1}
+            strokeDasharray="6 4"
+          />
+          {[
+            [el.x, el.y],
+            [el.x + el.width, el.y],
+            [el.x, el.y + el.height],
+            [el.x + el.width, el.y + el.height],
+          ].map(([hx, hy], i) => (
+            <rect
+              key={i}
+              x={hx - 5}
+              y={hy - 5}
+              width={10}
+              height={10}
+              fill="#A8E86A"
+              stroke="#0e1210"
+              strokeWidth={1}
+            />
+          ))}
+        </g>
       )}
     </g>
   );

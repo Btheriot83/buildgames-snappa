@@ -83,8 +83,9 @@ export function AssistPanel() {
         </span>
       </div>
       <p className="text-[11px] leading-snug text-ink-muted">
-        Real layout/copy for this canvas size. No canned filler — needs a server
-        key.
+        {configured
+          ? "Real layout/copy for this canvas size. No canned filler."
+          : "Add BUILD_GAMES_LLM_API_KEY on the server to unlock pressman proofs."}
       </p>
       <textarea
         className="min-h-[64px] w-full resize-y rounded-sm border border-ink-border bg-ink-bg px-2 py-1.5 text-xs text-ink-text"
@@ -141,6 +142,40 @@ export function AssistPanel() {
                       type="button"
                       className="w-full rounded-sm border border-ink-border px-2 py-1 text-left hover:border-ink-lime-dim"
                       onClick={() => applyAssistText("subhead", h)}
+                    >
+                      {h}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {result.headlines[0] && (
+            <button
+              type="button"
+              className="w-full rounded-sm border border-ink-lime-dim px-2 py-1.5 text-xs text-ink-lime"
+              onClick={() => {
+                if (result.headlines[0]) applyAssistText("headline", result.headlines[0]);
+                if (result.subheads[0]) applyAssistText("subhead", result.subheads[0]);
+                if (result.ctas[0]) applyAssistText("cta", result.ctas[0]);
+              }}
+              data-testid="assist-apply-top"
+            >
+              Apply top proof set
+            </button>
+          )}
+          {result.ctas.length > 0 && (
+            <div>
+              <p className="mb-1 font-mono text-[9px] uppercase tracking-wider text-ink-muted">
+                CTAs
+              </p>
+              <ul className="space-y-1">
+                {result.ctas.map((h) => (
+                  <li key={h}>
+                    <button
+                      type="button"
+                      className="w-full rounded-sm border border-ink-border px-2 py-1 text-left hover:border-ink-lime-dim"
+                      onClick={() => applyAssistText("cta", h)}
                     >
                       {h}
                     </button>

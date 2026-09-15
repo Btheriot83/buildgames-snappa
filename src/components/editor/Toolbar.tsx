@@ -226,7 +226,7 @@ export function Toolbar() {
 
       <div className="ml-auto flex items-center gap-2">
         <div
-          className="hidden items-center gap-2 rounded-sm border border-ink-border bg-ink-panel px-2 py-1 font-mono text-[10px] text-ink-amber md:flex"
+          className="hidden items-center gap-2 px-1 font-mono text-[10px] text-ink-muted md:flex"
           title="Ink drops earned from templates & exports"
           data-testid="ink-drops"
         >

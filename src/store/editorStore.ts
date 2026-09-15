@@ -282,7 +282,17 @@ export const useEditorStore = create<EditorState>()(
         s.history.push(cloneDoc(s.document));
         s.future = [];
         s.document = doc;
-        s.selectedIds = [];
+        // Round 1: land on the headline so properties match Snappa density
+        const texts = doc.elements.filter((e) => e.type === "text");
+        const ranked = [...texts].sort((a, b) => {
+          const score = (e: (typeof texts)[number]) => {
+            const n = e.name.toLowerCase();
+            const size = e.type === "text" ? e.fontSize : 0;
+            return (n.includes("headline") || n.includes("title") ? 10 : 0) + size;
+          };
+          return score(b) - score(a);
+        });
+        s.selectedIds = ranked[0] ? [ranked[0].id] : [];
         s.dirty = true;
         s.showTemplates = false;
         s.status = "success";
@@ -313,7 +323,9 @@ export const useEditorStore = create<EditorState>()(
         s.document = createEmptyProject(s.document.canvas);
         s.selectedIds = [];
         s.dirty = true;
-        s.showTemplates = true;
+        // Round 5: stay on paper well with press video — templates stay optional
+        s.showTemplates = false;
+        s.viewport = { zoom: 0.55, panX: 48, panY: 36 };
       });
     },
 
